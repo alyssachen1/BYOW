@@ -61,7 +61,7 @@ public class World {
 
     }
 
-    private void fillWall() {
+    private void wrapWall() {
 
     }
 
