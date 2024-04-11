@@ -32,7 +32,8 @@ public class World {
         ter.initialize(width, height);
         random = new Random(seed);
         TETile[][] randomTiles = new TETile[width][height];
-        fillWithRandomTiles(randomTiles); //change this to fill with rooms or hallways, etc.
+        fillWithNothing(randomTiles); //just added this
+        fillWorld(randomTiles); //change this to fill with rooms or hallways, etc.
         currentState = randomTiles;
     }
 
@@ -42,7 +43,7 @@ public class World {
         ter.initialize(width, height);
     }
 
-    public void fillWithRandomTiles(TETile[][] tiles) {
+    public void fillWorld(TETile[][] tiles) {
         int height = tiles[0].length;
         int width = tiles.length;
         for (int x = 0; x < width; x++) {
@@ -50,6 +51,22 @@ public class World {
                 tiles[x][y] = randomTile();
             }
         }
+    }
+
+    private void generateRoom() {
+
+    }
+
+    private void generateHallway() {
+
+    }
+
+    private void fillWall() {
+
+    }
+
+    private void fillFLoor() {
+
     }
 
 
