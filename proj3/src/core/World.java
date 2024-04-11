@@ -53,21 +53,31 @@ public class World {
         }
     }
 
+    //generate random room
     private void generateRoom() {
 
     }
 
-    private void generateHallway() {
+    //helper method for generateRoom
+    private void fillFLoor() {
+    }
+
+    //generate hallway that can connect to one room to another or only to one room
+    private void generateHallway(Room room, Room room) {
 
     }
+    
 
     private void wrapWall() {
-
     }
 
-    private void fillFLoor() {
 
+    //check if there is enough space to generate one more room
+    private boolean isEnoughSpace() {
+        return true;
     }
+
+
 
 
     public void fillWithNothing(TETile[][] tiles) {
