@@ -103,6 +103,7 @@ public class World {
         };
     }
 
+
     public void saveBoard(TETile[][] tiles) {
 //        TETile[][] transposeState = transpose(tiles);
 //        this.currentState = flip(transposeState);
@@ -110,6 +111,14 @@ public class World {
         this.height = tiles.length;
         saveBoard();
     }
+//    public void saveBoard(TETile[][] tiles) {
+//        TETile[][] transposeState = transpose(tiles);
+//        this.currentState = flip(transposeState);
+//        this.width = tiles[0].length;
+//        this.height = tiles.length;
+//        saveBoard();
+//    }
+
 
 
     public void saveBoard() {
@@ -175,6 +184,7 @@ public class World {
 //    }
 
     public void runGame() {
+        fillWithNothing(currentState);
         ter.renderFrame(currentState);
     }
 
