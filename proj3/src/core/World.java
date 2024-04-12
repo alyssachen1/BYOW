@@ -9,13 +9,13 @@ import java.util.Random;
 
 public class World {
 
-    private static final int DEFAULT_WIDTH = 50;
+    private static final int DEFAULT_WIDTH = 80;
 
-    private static final int DEFAULT_HEIGHT = 50;
+    private static final int DEFAULT_HEIGHT = 40;
 
     private static final String SAVE_FILE = "src/save.txt";
 
-    private static final int notFilled = 2500; //count amount of empty tiles; make sure less than 50% of the map filled with nothing
+    private static final int notFilled = 3200; //count amount of empty tiles; make sure less than 50% of the map filled with nothing
 
     //    private long prevFrameTimestep;
     private TERenderer ter;
