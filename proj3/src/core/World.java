@@ -60,6 +60,7 @@ public class World {
     }
 
     private void wrapWall() {
+
     }
 
     private boolean isEnoughSpace() {
