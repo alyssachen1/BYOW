@@ -15,7 +15,7 @@ public class World {
 
     private static final String SAVE_FILE = "src/save.txt";
 
-    private static final int notFilled = 2500; //count amount of empty tiles; make sure less than 50% of the map filled with nothing
+    private static final int notFilled = 3200; //count amount of empty tiles; make sure less than 50% of the map filled with nothing
 
     //    private long prevFrameTimestep;
     private TERenderer ter;
@@ -58,8 +58,14 @@ public class World {
 
     //generate random room
     private void generateRoom() {
+        // minimum dimensions : 4x4?
+        // max dimension : 10x10?
+        // also add minimum spacing parameter between rooms (?)
 
     }
+
+    private void generateHallway() {
+        // use Prim's algorithm to select hallways to connect two rooms
 
     //helper method for generateRoom
     private void fillFloor() {
