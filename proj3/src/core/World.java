@@ -53,6 +53,7 @@ public class World {
         }
     }
 
+    //generate random room
     private void generateRoom() {
         // minimum dimensions : 4x4?
         // max dimension : 10x10?
@@ -62,15 +63,27 @@ public class World {
 
     private void generateHallway() {
         // use Prim's algorithm to select hallways to connect two rooms
+
+    //helper method for generateRoom
+    private void fillFLoor() {
     }
+
+    //generate hallway that can connect to one room to another or only to one room
+    private void generateHallway(Room room, Room room) {
+
+    }
+    
 
     private void wrapWall() {
-
     }
 
-    private void fillFLoor() {
 
+    //check if there is enough space to generate one more room
+    private boolean isEnoughSpace() {
+        return true;
     }
+
+
 
 
     public void fillWithNothing(TETile[][] tiles) {
