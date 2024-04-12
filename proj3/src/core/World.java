@@ -104,8 +104,8 @@ public class World {
     }
 
     public void saveBoard(TETile[][] tiles) {
-        TETile[][] transposeState = transpose(tiles);
-        this.currentState = flip(transposeState);
+//        TETile[][] transposeState = transpose(tiles);
+//        this.currentState = flip(transposeState);
         this.width = tiles[0].length;
         this.height = tiles.length;
         saveBoard();
