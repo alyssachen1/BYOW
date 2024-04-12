@@ -1,4 +1,5 @@
 import core.AutograderBuddy;
+import core.Room;
 import edu.princeton.cs.algs4.StdDraw;
 import org.junit.jupiter.api.Test;
 import tileengine.TERenderer;
@@ -27,6 +28,11 @@ public class WorldGenTests {
     }
 
     // room generator test
+    @Test
+    public void roomTest() {
+        Room room = new Room();
+        room.generateRoom();
+    }
 
     // hallway generator test
 }
