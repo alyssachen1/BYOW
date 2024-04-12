@@ -1,9 +1,10 @@
 package core;
+import core.World;
 
 public class Main {
     public static void main(String[] args) {
-
-        // build your own world!
+        World world = new World(12345);
+        world.fillWithNothing()
 
 
     }

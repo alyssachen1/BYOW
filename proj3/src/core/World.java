@@ -59,17 +59,18 @@ public class World {
     }
 
     //helper method for generateRoom
-    private void fillFLoor() {
+    private void fillFloor() {
     }
-
-    //generate hallway that can connect to one room to another or only to one room
-    private void generateHallway(Room room, Room room) {
-
-    }
-    
 
     private void wrapWall() {
     }
+
+    //generate hallway that can connect to one room to another or only to one room
+//    private void generateHallway(Room room, Room room) {
+//    }
+
+
+
 
 
     //check if there is enough space to generate one more room
