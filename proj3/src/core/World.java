@@ -23,6 +23,7 @@ public class World {
     private TETile[][] currentState;
     private int width;
     private int height;
+    Room room;
 
 
     public World(long seed) {
@@ -31,10 +32,10 @@ public class World {
         ter = new TERenderer();
         ter.initialize(width, height);
         random = new Random(seed);
-        TETile[][] randomTiles = new TETile[width][height];
-        fillWithNothing(randomTiles); //just added this
-        fillWorld(randomTiles); //change this to fill with rooms or hallways, etc.
-        currentState = randomTiles;
+        TETile[][] currentState = new TETile[width][height];
+        fillWithNothing(currentState); //just added this
+        fillWorld(currentState); //change this to fill with rooms or hallways, etc.
+
     }
 
     public void fillWorld(TETile[][] tiles) {
@@ -171,9 +172,14 @@ public class World {
 //            }
 //    }
 
+    public void placeRoom() {
+        Room room = new Room(currentState, random);
+    }
+
     public void runGame() {
-        fillWithNothing(currentState);
+        placeRoom();
         ter.renderFrame(currentState);
+
     }
 
 }
