@@ -47,6 +47,10 @@ public class World {
         }
     }
 
+    private void placeRoom(Room room) {
+
+    }
+
     private boolean isEnoughSpace() {
         return true;
     }

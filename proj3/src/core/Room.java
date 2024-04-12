@@ -4,34 +4,43 @@ import utils.FileUtils;
 import java.util.*;
 
 public class Room {
-    private static final int minWidth = 4;
+    private static final double minWidth = 4.0;
 
-    private static final int minHeight = 4;
+    private static final double minHeight = 4.0;
 
-    private static final int maxWidth = 10;
+    private static final double maxWidth = 10.0;
 
-    private static final int maxHeight = 10;
+    private static final double maxHeight = 10.0;
 
-    private static final int minSpacing = 5;
+    private static final double minSpacing = 5.0;
 
-    private static final int maxSpacing = 8;
+    private static final double maxSpacing = 8.0;
 
+
+
+    public Room() {
+
+    }
 
     public void generateRoom() {
         // minimum dimensions : 4x4?
         // max dimension : 10x10?
         // also add minimum spacing parameter between rooms (?)
         Random random = new Random();
-        int width = random.nextInt(maxWidth - minWidth + 1) + minWidth;
-        int height = random.nextInt(maxHeight - minHeight + 1) + minHeight;
+        double width = RandomUtils.uniform(random, minWidth, maxHeight);
+        double height = RandomUtils.uniform(random, minHeight, maxHeight);
+        double spacing = RandomUtils.uniform(random, minSpacing, maxSpacing);
 
     }
 
     private void fillFloor() {
+
     }
 
     private void wrapWall() {
 
     }
+
+    private
 
 }
