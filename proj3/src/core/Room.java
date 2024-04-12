@@ -92,8 +92,15 @@ public class Room {
         }
     }
 
-    private boolean overlap() { //implement
-        return false;
+    private boolean isValidLocation() {
+        for (int x = startX; x < startX + width; x++) {
+            for (int y = startY; y < startY + height; y++) {
+                if (world[x][y] != Tileset.NOTHING) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
-}
+
