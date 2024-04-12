@@ -7,6 +7,5 @@ public class Main {
         TERenderer ter = new TERenderer();
         World world = new World(12345);
         world.runGame();
-
     }
 }

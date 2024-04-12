@@ -37,12 +37,6 @@ public class World {
         currentState = randomTiles;
     }
 
-    public World(String filename) {
-        this.currentState = loadBoard(filename);
-        ter = new TERenderer();
-        ter.initialize(width, height);
-    }
-
     public void fillWorld(TETile[][] tiles) {
         int height = tiles[0].length;
         int width = tiles.length;
@@ -178,6 +172,10 @@ public class World {
 //                return null;
 //            }
 //    }
+
+    public void runGame() {
+        ter.renderFrame(currentState);
+    }
 
 }
 
