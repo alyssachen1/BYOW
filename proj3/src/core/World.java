@@ -9,9 +9,9 @@ import java.util.Random;
 
 public class World {
 
-    private static final int DEFAULT_WIDTH = 50;
+    private static final int DEFAULT_WIDTH = 80;
 
-    private static final int DEFAULT_HEIGHT = 50;
+    private static final int DEFAULT_HEIGHT = 40;
 
     private static final String SAVE_FILE = "src/save.txt";
 
@@ -52,6 +52,9 @@ public class World {
             }
         }
     }
+
+
+
 
     //generate random room
     private void generateRoom() {
