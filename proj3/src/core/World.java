@@ -54,8 +54,6 @@ public class World {
     }
 
 
-
-
     //generate random room
     private void generateRoom() {
         // minimum dimensions : 4x4?
@@ -64,30 +62,31 @@ public class World {
 
     }
 
-    private void generateHallway() {
-        // use Prim's algorithm to select hallways to connect two rooms
-
-    //helper method for generateRoom
     private void fillFloor() {
     }
 
     private void wrapWall() {
     }
 
-    //generate hallway that can connect to one room to another or only to one room
-//    private void generateHallway(Room room, Room room) {
-//    }
-
-
-
-
-
-    //check if there is enough space to generate one more room
     private boolean isEnoughSpace() {
         return true;
     }
 
 
+    private void generateHallway() {
+    }
+    // use Prim's algorithm to select hallways to connect two rooms
+
+
+    //helper method for generateRoom
+
+
+    //generate hallway that can connect to one room to another or only to one room
+//    private void generateHallway(Room room, Room room) {
+//    }
+
+
+    //check if there is enough space to generate one more room
 
 
     public void fillWithNothing(TETile[][] tiles) {
@@ -135,9 +134,7 @@ public class World {
 
         FileUtils.writeFile(SAVE_FILE, builder.toString());
     }
-
-
-    public TETile[][] loadBoard(String filename) {
+//    public TETile[][] loadBoard(String filename) {
 //            try {
 //                String fileContents = FileUtils.readFile(filename);
 //
@@ -180,7 +177,8 @@ public class World {
 //                e.printStackTrace();
 //                return null;
 //            }
-    }
-
+//    }
 
 }
+
+
