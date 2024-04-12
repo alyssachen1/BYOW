@@ -2,6 +2,8 @@ package core;
 import utils.RandomUtils;
 import utils.FileUtils;
 import java.util.*;
+import core.World;
+import tileengine.TETile;
 
 public class Room {
     private static final double minWidth = 4.0;
@@ -16,7 +18,7 @@ public class Room {
 
     private static final double maxSpacing = 8.0;
 
-
+    public TETile[][] world;
 
     public Room() {
 
@@ -30,17 +32,20 @@ public class Room {
         double width = RandomUtils.uniform(random, minWidth, maxHeight);
         double height = RandomUtils.uniform(random, minHeight, maxHeight);
         double spacing = RandomUtils.uniform(random, minSpacing, maxSpacing);
+        fillFloor(width, height);
+        wrapWall(width, height);
 
     }
 
-    private void fillFloor() {
+    private void fillFloor(int width, int height) {
 
     }
 
-    private void wrapWall() {
+    private void wrapWall(int width, int height) {
 
     }
 
-    private
-
+    private boolean isSpace() {
+        return true;
+    }
 }
