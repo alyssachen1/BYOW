@@ -36,13 +36,10 @@ public class Room {
     }
 
     public void generateRoom() {
-        double width = RandomUtils.uniform(random, minWidth, maxWidth);
-        double height = RandomUtils.uniform(random, minHeight, maxHeight);
-        double spacing = RandomUtils.uniform(random, minSpacing, maxSpacing);
-        roomShape(random.nextInt(world.DEFAULT_WIDTH), world.DEFAULT_HEIGHT, width, height);
         // minimum dimensions : 4x4?
         // max dimension : 10x10?
         // also add minimum spacing parameter between rooms (?)
+        roomShape(random.nextInt(80), 40, width, height);
         this.width = RandomUtils.uniform(random, minWidth, maxWidth);
         this.height = RandomUtils.uniform(random, minHeight, maxHeight);
         int spacing = RandomUtils.uniform(random, minSpacing, maxSpacing);
