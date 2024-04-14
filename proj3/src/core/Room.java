@@ -49,7 +49,7 @@ public class Room {
         startY = RandomUtils.uniform(random, 0, world[0].length - width);
 
         fillFloor();
-//        wrapWall();
+        wrapWall();
 
         roomShape(random.nextInt(), random.nextInt(), width, height);
     }
@@ -62,15 +62,14 @@ public class Room {
         }
     }
 
-//    private void wrapWall() {
-//        for (int x = x - 1; x <= startX + width; x++){
-//            for (int x )
-//        }
-//    }
-
-
-    private boolean isSpace() {
-        return true;
+    private void wrapWall() {
+        for (int x = startX; x < startX + width; x++) {
+            for (int y = startY; y < startY + height; y++) {
+                if ((x == 0 || x == world.length - 1 || y == 0 || y == world[x].length - 1) ) {
+                    world[x][y] = Tileset.WALL;
+                }
+            }
+        }
     }
 
     private void roomShape(double x, double y, double width, double height) {

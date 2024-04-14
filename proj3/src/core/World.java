@@ -6,6 +6,7 @@ import tileengine.Tileset;
 import utils.FileUtils;
 
 import java.util.Random;
+import utils.RandomUtils;
 
 public class World {
 
@@ -23,7 +24,8 @@ public class World {
     private TETile[][] currentState;
     private int width;
     private int height;
-    Room room;
+
+    private int numRooms;
 
 
     public World(long seed) {
@@ -37,17 +39,15 @@ public class World {
         placeRoom();
 //        fillWorld(currentState); //change this to fill with rooms or hallways, etc.
 
+        numRooms = RandomUtils.uniform();
+
+        for (int i = 0; i < numRooms; i++) {
+            placeRoom();
+        }
+
+
     }
 
-    public void fillWorld(TETile[][] tiles) {
-        int height = tiles[0].length;
-        int width = tiles.length;
-        for (int x = 0; x < width; x++) {
-            for (int y = 0; y < height; y++) {
-                tiles[x][y] = randomTile();
-            }
-        }
-    }
 
     private void placeRoom(Room room) {
 
