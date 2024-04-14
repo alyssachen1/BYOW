@@ -28,7 +28,6 @@ public class Room {
     private TETile[][] world;
 
 
-
     public Room(TETile[][] world, Random random) {
         // make the shape
         this.world = world;
@@ -40,6 +39,7 @@ public class Room {
         // minimum dimensions : 4x4?
         // max dimension : 10x10?
         // also add minimum spacing parameter between rooms (?)
+        roomShape(random.nextInt(80), 40, width, height);
         this.width = RandomUtils.uniform(random, minWidth, maxWidth);
         this.height = RandomUtils.uniform(random, minHeight, maxHeight);
         int spacing = RandomUtils.uniform(random, minSpacing, maxSpacing);
@@ -52,12 +52,11 @@ public class Room {
 //        wrapWall();
 
         roomShape(random.nextInt(), random.nextInt(), width, height);
-
     }
 
     private void fillFloor() {
         for (int x = startX; x < startX + width; x++) {
-            for (int y = startY; y < startY + height; y++){
+            for (int y = startY; y < startY + height; y++) {
                 world[x][y] = Tileset.FLOOR;
             }
         }
@@ -104,4 +103,8 @@ public class Room {
     }
 
 
+
 }
+
+
+
