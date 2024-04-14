@@ -3,28 +3,36 @@ import edu.princeton.cs.algs4.StdDraw;
 import utils.RandomUtils;
 import utils.FileUtils;
 import java.util.*;
+import core.World;
+import tileengine.TETile;
+import tileengine.TERenderer;
+import tileengine.Tileset;
 
 public class Room {
-    private static final double minWidth = 4.0;
+    private static final int minWidth = 4;
+    private static final int minHeight = 4;
+    private static final int maxWidth = 10;
+    private static final int maxHeight = 10;
+    private static final int minSpacing = 5;
+    private static final int maxSpacing = 8;
 
-    private static final double minHeight = 4.0;
+    private int startX;
+    private int startY;
+    private int width;
+    private int height;
 
-    private static final double maxWidth = 10.0;
-
-    private static final double maxHeight = 10.0;
-
-    private static final double minSpacing = 5.0;
-
-    private static final double maxSpacing = 8.0;
+    private TERenderer ter;
 
     Random random = new Random();
 
-    World world;
+    private TETile[][] world;
 
 
-    public Room(World world) {
+    public Room(TETile[][] world, Random random) {
         // make the shape
         this.world = world;
+        ter = new TERenderer();
+        generateRoom();
     }
 
     public void generateRoom() {
@@ -32,14 +40,40 @@ public class Room {
         double height = RandomUtils.uniform(random, minHeight, maxHeight);
         double spacing = RandomUtils.uniform(random, minSpacing, maxSpacing);
         roomShape(random.nextInt(world.DEFAULT_WIDTH), world.DEFAULT_HEIGHT, width, height);
+        // minimum dimensions : 4x4?
+        // max dimension : 10x10?
+        // also add minimum spacing parameter between rooms (?)
+        this.width = RandomUtils.uniform(random, minWidth, maxWidth);
+        this.height = RandomUtils.uniform(random, minHeight, maxHeight);
+        int spacing = RandomUtils.uniform(random, minSpacing, maxSpacing);
+
+
+        startX = RandomUtils.uniform(random, 0, world.length - width);
+        startY = RandomUtils.uniform(random, 0, world[0].length - width);
+
+        fillFloor();
+//        wrapWall();
+
+        roomShape(random.nextInt(), random.nextInt(), width, height);
     }
 
     private void fillFloor() {
-
+        for (int x = startX; x < startX + width; x++) {
+            for (int y = startY; y < startY + height; y++) {
+                world[x][y] = Tileset.FLOOR;
+            }
+        }
     }
 
-    private void wrapWall() {
+//    private void wrapWall() {
+//        for (int x = x - 1; x <= startX + width; x++){
+//            for (int x )
+//        }
+//    }
 
+
+    private boolean isSpace() {
+        return true;
     }
 
     private void roomShape(double x, double y, double width, double height) {
@@ -60,8 +94,14 @@ public class Room {
         }
     }
 
-    private boolean overlap() { //implement
-        return false;
+    private boolean isValidLocation() {
+        for (int x = startX; x < startX + width; x++) {
+            for (int y = startY; y < startY + height; y++) {
+                if (world[x][y] != Tileset.NOTHING) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
-
 }
