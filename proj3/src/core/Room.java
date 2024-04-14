@@ -28,13 +28,10 @@ public class Room {
     }
 
     public void generateRoom() {
-        // minimum dimensions : 4x4?
-        // max dimension : 10x10?
-        // also add minimum spacing parameter between rooms (?)
         double width = RandomUtils.uniform(random, minWidth, maxWidth);
         double height = RandomUtils.uniform(random, minHeight, maxHeight);
         double spacing = RandomUtils.uniform(random, minSpacing, maxSpacing);
-        roomShape(random.nextInt(), random.nextInt(), width, height);
+        roomShape(random.nextInt(world.DEFAULT_WIDTH), world.DEFAULT_HEIGHT, width, height);
     }
 
     private void fillFloor() {
