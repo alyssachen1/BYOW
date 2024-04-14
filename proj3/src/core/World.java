@@ -34,7 +34,8 @@ public class World {
         random = new Random(seed);
         TETile[][] currentState = new TETile[width][height];
         fillWithNothing(currentState); //just added this
-        fillWorld(currentState); //change this to fill with rooms or hallways, etc.
+        placeRoom();
+//        fillWorld(currentState); //change this to fill with rooms or hallways, etc.
 
     }
 
@@ -177,7 +178,6 @@ public class World {
     }
 
     public void runGame() {
-        placeRoom();
         ter.renderFrame(currentState);
 
     }
