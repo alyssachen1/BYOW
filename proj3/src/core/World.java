@@ -24,7 +24,6 @@ public class World {
 
     public World(String seed) {
         ter = new TERenderer();
-        ter.initialize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
         this.random = new Random(convertString(seed));
         this.rooms = new ArrayList<>();
         fillWithNothing(); //just added this
@@ -98,6 +97,7 @@ public class World {
     }
 
     public void runGame() {
+        ter.initialize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
         ter.renderFrame(currentState);
     }
 
