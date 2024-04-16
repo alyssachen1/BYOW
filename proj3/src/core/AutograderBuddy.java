@@ -20,17 +20,36 @@ public class AutograderBuddy {
      * @return the 2D TETile[][] representing the state of the world
      */
     public static TETile[][] getWorldFromInput(String input) {
-        // case insensitivity
+        if (input == null || input.isEmpty()) {
+            throw new IllegalArgumentException("Input string is null or empty.");
+        }
+
+        // Convert to uppercase to ensure case insensitivity
         String upperInput = input.toUpperCase();
 
         int startIndex = upperInput.indexOf('N') + 1;
         int endIndex = upperInput.indexOf('S', startIndex);
 
+        //        if (startIndex == 0 || endIndex == -1 || startIndex >= endIndex) {
+        //            throw new IllegalArgumentException("Input string does not contain valid 'N...S' format.");
+        //        }
+
         String seedString = upperInput.substring(startIndex, endIndex);
 
-        World world = new World(seedString);
-        return world.currentState;
+        // Validate that the seedString is not empty and numeric
+        if (seedString.isEmpty() || !seedString.matches("\\d+")) {
+            throw new IllegalArgumentException("Seed string is invalid or not purely numeric.");
+        }
+
+        try {
+            // Attempt to create world with seedString
+            World world = new World(seedString);
+            return world.currentState;
+        } catch (NumberFormatException e) {
+            throw new RuntimeException("Failed to parse seed string as a number.", e);
+        }
     }
+
 
 
 
