@@ -9,49 +9,34 @@ import tileengine.TERenderer;
 import tileengine.Tileset;
 
 public class Room {
-    private static final int minWidth = 4;
-    private static final int minHeight = 4;
+    private static final int minWidth = 5;
+    private static final int minHeight = 5;
     private static final int maxWidth = 10;
     private static final int maxHeight = 10;
-    private static final int minSpacing = 5;
-    private static final int maxSpacing = 8;
 
-    private int startX;
-    private int startY;
-    private int width;
-    private int height;
 
-    private TERenderer ter;
+    public int startX;
+    public int startY;
+    public int width;
+    public int height;
 
     Random random = new Random();
 
     private TETile[][] world;
 
-
     public Room(TETile[][] world, Random random) {
-        // make the shape
         this.world = world;
-        ter = new TERenderer();
-        generateRoom();
-    }
-
-    public void generateRoom() {
-        // minimum dimensions : 4x4?
-        // max dimension : 10x10?
-        // also add minimum spacing parameter between rooms (?)
-        roomShape(random.nextInt(80), 40, width, height);
+        // make the shape
         this.width = RandomUtils.uniform(random, minWidth, maxWidth);
         this.height = RandomUtils.uniform(random, minHeight, maxHeight);
-        int spacing = RandomUtils.uniform(random, minSpacing, maxSpacing);
+        this.startX = RandomUtils.uniform(random, 1, world.length - width - 1);
+        this.startY = RandomUtils.uniform(random, 1, world[0].length - height - 1);
 
+    }
 
-        startX = RandomUtils.uniform(random, 0, world.length - width);
-        startY = RandomUtils.uniform(random, 0, world[0].length - width);
-
+    public void placeRoom() {
         fillFloor();
         wrapWall();
-
-        roomShape(random.nextInt(), random.nextInt(), width, height);
     }
 
     private void fillFloor() {
@@ -63,36 +48,39 @@ public class Room {
     }
 
     private void wrapWall() {
-        for (int x = startX; x < startX + width; x++) {
-            for (int y = startY; y < startY + height; y++) {
-                if ((x == 0 || x == world.length - 1 || y == 0 || y == world[x].length - 1) ) {
+        for (int x = startX - 1; x < startX + width; x++) {
+            for (int y = startY - 1; y < startY + height; y++) {
+                if ((x == startX - 1 || x == startX + width - 1 || y == startY - 1 || y == startY + height- 1) ) {
                     world[x][y] = Tileset.WALL;
                 }
             }
         }
     }
 
-    private void roomShape(double x, double y, double width, double height) {
-        int methodNumber = random.nextInt(3) + 1; // Generates 1, 2, or 3
 
-        switch (methodNumber) {
-            case 1:
-                StdDraw.filledSquare(x, y, width / 2);
-                break;
-            case 2:
-                StdDraw.filledRectangle(x, y, width / 2, height / 2);
-                break;
-            case 3:
-                StdDraw.filledCircle(x, y, height / 2);
-                break;
-            default:
-                System.out.println("Invalid method number");
-        }
-    }
 
-    private boolean isValidLocation() {
-        for (int x = startX; x < startX + width; x++) {
-            for (int y = startY; y < startY + height; y++) {
+
+//    private void roomShape(double x, double y, double width, double height) {
+//        int methodNumber = random.nextInt(3) + 1; // Generates 1, 2, or 3
+//
+//        switch (methodNumber) {
+//            case 1:
+//                StdDraw.filledSquare(x, y, width / 2);
+//                break;
+//            case 2:
+//                StdDraw.filledRectangle(x, y, width / 2, height / 2);
+//                break;
+//            case 3:
+//                StdDraw.filledCircle(x, y, height / 2);
+//                break;
+//            default:
+//                System.out.println("Invalid method number");
+//        }
+//    }
+
+    public boolean isValidLocation() {
+        for (int x = startX - 1; x <= startX + width + 1; x++) {
+            for (int y = startY - 1; y <= startY + height + 1; y++) {
                 if (world[x][y] != Tileset.NOTHING) {
                     return false;
                 }
@@ -100,9 +88,6 @@ public class Room {
         }
         return true;
     }
-
-
-
 }
 
 
