@@ -20,11 +20,23 @@ public class AutograderBuddy {
      * @return the 2D TETile[][] representing the state of the world
      */
     public static TETile[][] getWorldFromInput(String input) {
-        // input form N######S
-        String seedString = input.substring(1, input.indexOf('S'));
-        long seed = Long.parseLong(seedString);
+        // case insensitivity
+        String upperInput = input.toUpperCase();
+
+        int startIndex = upperInput.indexOf('N') + 1;
+        int endIndex = upperInput.indexOf('S', startIndex);
+
+        String seedString = upperInput.substring(startIndex, endIndex);
+
         World world = new World(seedString);
         return world.currentState;
+    }
+
+
+
+    public static void main(String[] args) {
+        TETile[][] worldTiles = getWorldFromInput("N123456S");
+
     }
 
     //    private static void processCommand(char command, World world) {

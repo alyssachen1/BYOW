@@ -31,10 +31,7 @@ public class World {
         //        fillWorld(currentState); //change this to fill with rooms or hallways, etc.
         generateRooms();
         generateHallways();
-
     }
-
-
 
     private void generateRooms() {
         // minimum dimensions : 4x4?

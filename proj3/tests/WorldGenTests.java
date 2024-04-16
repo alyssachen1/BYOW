@@ -10,7 +10,7 @@ public class WorldGenTests {
     @Test
     public void basicTest() {
         // put different seeds here to test different worlds
-        TETile[][] tiles = AutograderBuddy.getWorldFromInput("n1234567890123456789s");
+        TETile[][] tiles = AutograderBuddy.getWorldFromInput("N1234567890123456789S");
 
         TERenderer ter = new TERenderer();
         ter.initialize(tiles.length, tiles[0].length);
@@ -21,7 +21,7 @@ public class WorldGenTests {
     @Test
     public void basicInteractivityTest() {
         // TODO: write a test that uses an input like "n123swasdwasd"
-        TETile[][] tiles = AutograderBuddy.getWorldFromInput("n123sqasdwasd");
+        TETile[][] tiles = AutograderBuddy.getWorldFromInput("N12359572S");
         TERenderer ter = new TERenderer();
         ter.initialize(tiles.length, tiles[0].length);
         ter.renderFrame(tiles);
@@ -43,14 +43,4 @@ public class WorldGenTests {
         ter2.renderFrame(tiles2);
         StdDraw.pause(5000);
     }
-
-    // room generator test
-    @Test
-    public void roomTest() {
-//        World word = new World;
-//        Room room = new Room();
-//        room.generateRoom();
-    }
-
-    // hallway generator test
 }
