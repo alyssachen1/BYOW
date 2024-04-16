@@ -3,6 +3,7 @@ package core;
 import tileengine.TETile;
 import tileengine.Tileset;
 import core.World;
+import utils.FileUtils;
 
 public class AutograderBuddy {
 
@@ -19,9 +20,33 @@ public class AutograderBuddy {
      * @return the 2D TETile[][] representing the state of the world
      */
     public static TETile[][] getWorldFromInput(String input) {
-        World world = new World(input);
+        // input form N######S
+        String seedString = input.substring(1, input.indexOf('S'));
+        long seed = Long.parseLong(seedString);
+        World world = new World(seedString);
         return world.currentState;
     }
+
+//    private static void processCommand(char command, World world) {
+//        // Example: Process movement commands, interaction commands, etc.
+//        switch (command) {
+//            case 'w':
+//
+//                break;
+//            case 's':
+//
+//                break;
+//            case 'a':
+//
+//                break;
+//            case 'd':
+//
+//                break;
+//            case 'q':
+//
+//                break;
+//            // Add more cases as needed
+//        }
 
 
     /**
