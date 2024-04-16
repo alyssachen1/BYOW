@@ -2,8 +2,8 @@ package core;
 
 import tileengine.TETile;
 import tileengine.Tileset;
-import core.World;
-import utils.FileUtils;
+//import core.World;
+//import utils.FileUtils;
 
 public class AutograderBuddy {
 
@@ -27,26 +27,25 @@ public class AutograderBuddy {
         return world.currentState;
     }
 
-//    private static void processCommand(char command, World world) {
-//        // Example: Process movement commands, interaction commands, etc.
-//        switch (command) {
-//            case 'w':
-//
-//                break;
-//            case 's':
-//
-//                break;
-//            case 'a':
-//
-//                break;
-//            case 'd':
-//
-//                break;
-//            case 'q':
-//
-//                break;
-//            // Add more cases as needed
-//        }
+    //    private static void processCommand(char command, World world) {
+    //        switch (command) {
+    //            case 'w':
+    //
+    //                break;
+    //            case 's':
+    //
+    //                break;
+    //            case 'a':
+    //
+    //                break;
+    //            case 'd':
+    //
+    //                break;
+    //            case 'q':
+    //
+    //                break;
+    //            // Add more cases as needed
+    //        }
 
 
     /**

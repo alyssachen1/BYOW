@@ -3,7 +3,6 @@ package core;
 import tileengine.TERenderer;
 import tileengine.TETile;
 import tileengine.Tileset;
-import utils.FileUtils;
 import java.util.ArrayList;
 
 import java.util.Random;
@@ -29,7 +28,7 @@ public class World {
         this.random = new Random(convertString(seed));
         this.rooms = new ArrayList<>();
         fillWithNothing(); //just added this
-//        fillWorld(currentState); //change this to fill with rooms or hallways, etc.
+        //        fillWorld(currentState); //change this to fill with rooms or hallways, etc.
         generateRooms();
         generateHallways();
 
@@ -43,17 +42,16 @@ public class World {
         // also add minimum spacing parameter between rooms (?)
 
         numRooms = RandomUtils.uniform(random, MIN_ROOMS, MAX_ROOMS);
-            int attempts = 0;
-            while (attempts < numRooms) {
-                Room room = new Room(currentState, random);
-                if (room.isValidLocation()) {
-                    room.placeRoom();
-                    rooms.add(room);
-                    attempts++;
-                }
+        int attempts = 0;
+        while (attempts < numRooms) {
+            Room room = new Room(currentState, random);
+            if (room.isValidLocation()) {
+                room.placeRoom();
+                rooms.add(room);
+                attempts++;
             }
-
         }
+    }
 
     private void generateHallways() {
         for (int i = 0; i < rooms.size() - 1; i++) {
@@ -69,8 +67,8 @@ public class World {
 
 
     //generate hallway that can connect to one room to another or only to one room
-//    private void generateHallway(Room room, Room room) {
-//    }
+    //    private void generateHallway(Room room, Room room) {
+    //    }
 
 
     //check if there is enough space to generate one more room
