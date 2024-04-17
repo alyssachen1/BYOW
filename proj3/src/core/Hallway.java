@@ -44,9 +44,6 @@ public class Hallway {
         int endY = Math.max(room1Y, room2Y);
 
         for (int y = startY; y < endY; y++) {
-//            if (world[room1X][y] == Tileset.WALL) {
-//                continue;
-//            }
             world[room1X][y] = Tileset.FLOOR;
         }
     }
