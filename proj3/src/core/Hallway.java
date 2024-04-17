@@ -1,6 +1,5 @@
 package core;
 import tileengine.TETile;
-import tileengine.TERenderer;
 import tileengine.Tileset;
 import java.util.*;
 import utils.RandomUtils;
@@ -27,17 +26,16 @@ public class Hallway {
 
     public void connectRooms() {
         if (room1X != room2X && room1Y != room2Y) {
-            LShapedHall();
+            lShapedHall();
         } else {
-        if (room1X == room2X) {
-            verticalFillFloor();
-            verticalWrapWall();
-        }
-        if (room1Y == room2Y) {
-            horizontalFillFloor();
-            horizontalWrapWall();
-
-        }
+            if (room1X == room2X) {
+                verticalFillFloor();
+                verticalWrapWall();
+            }
+            if (room1Y == room2Y) {
+                horizontalFillFloor();
+                horizontalWrapWall();
+            }
         }
     }
 
@@ -69,7 +67,7 @@ public class Hallway {
             }
             world[room1X - 1][y] = Tileset.WALL;
         }
-        }
+    }
 
     private void horizontalFillFloor() {
         int startX = Math.min(room1X, room2X);
@@ -98,7 +96,7 @@ public class Hallway {
         }
     }
 
-    private void LShapedHall() {
+    private void lShapedHall() {
         horizontalFillFloor();
         horizontalWrapWall();
         int turnX = room2X;

@@ -2,7 +2,8 @@ package core;
 
 import tileengine.TETile;
 import tileengine.Tileset;
-import core.World;
+//import core.World;
+//import utils.FileUtils;
 
 public class AutograderBuddy {
 
@@ -19,9 +20,49 @@ public class AutograderBuddy {
      * @return the 2D TETile[][] representing the state of the world
      */
     public static TETile[][] getWorldFromInput(String input) {
-        World world = new World(input);
+        // N#####S
+        if (input == null || input.isEmpty()) {
+            throw new IllegalArgumentException("Input string is null or empty.");
+        }
+
+        // Case insensitivity
+        String upperInput = input.toUpperCase();
+
+        int startIndex = upperInput.indexOf('N') + 1;
+        int endIndex = upperInput.indexOf('S', startIndex);
+
+
+        String seedString = upperInput.substring(startIndex, endIndex);
+        World world = new World(seedString);
         return world.currentState;
     }
+
+
+
+
+    public static void main(String[] args) {
+        TETile[][] worldTiles = getWorldFromInput("N123456S");
+    }
+
+    //    private static void processCommand(char command, World world) {
+    //        switch (command) {
+    //            case 'w':
+    //
+    //                break;
+    //            case 's':
+    //
+    //                break;
+    //            case 'a':
+    //
+    //                break;
+    //            case 'd':
+    //
+    //                break;
+    //            case 'q':
+    //
+    //                break;
+    //            // Add more cases as needed
+    //        }
 
 
     /**
