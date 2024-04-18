@@ -37,12 +37,6 @@ public class World {
     }
 
 
-//    private void placeAvatar() {
-//        Room startRoom = rooms.get(0);
-//        int posX = startRoom.startX;
-//        int posY = startRoom.startY;
-//        currentState[posX][posY] = Tileset.AVATAR;
-//    }
 
     private void generateRooms() {
         // minimum dimensions : 4x4?

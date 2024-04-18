@@ -13,11 +13,6 @@ public class Avatar {
     private int GAME_HEIGHT;
     private TETile[][] world;
 
-    private int posX;
-
-    private int posY;
-
-    World world;
 
 
     public Avatar(TETile[][] world, Room room) {
@@ -43,6 +38,12 @@ public class Avatar {
             posX += deltaX;
             posY += deltaY;
         }
+    }
+
+
+    public void updateBoard() {
+
+
     }
 
 
