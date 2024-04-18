@@ -32,8 +32,7 @@ public class World {
         generateHallways();
         Room startRoom = rooms.get(0);
         Avatar avatar = new Avatar(currentState, startRoom);
-
-
+        avatar.updateBoard();
     }
 
 
