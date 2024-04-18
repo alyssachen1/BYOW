@@ -5,12 +5,8 @@ import tileengine.*;
 import tileengine.TETile;
 
 public class Avatar {
-
-    private int WIDTH;
     private int posX;
     private int posY;
-
-    private int GAME_HEIGHT;
     private TETile[][] world;
 
 
@@ -23,17 +19,14 @@ public class Avatar {
 
     }
 
-    // has to be floor tile
     public boolean canMove(int deltaX, int deltaY) {
-        TETile[][] t = world.currentState;
-        for (int i = 0; i < t.length; i++) {
-
+        if (world[deltaX][deltaY] == Tileset.FLOOR) {
+            return true;
         }
         return false;
     }
 
     public void move(int deltaX, int deltaY) {
-        TETile[][] t = world.currentState;
         if (canMove(deltaX, deltaY)) {
             posX += deltaX;
             posY += deltaY;
