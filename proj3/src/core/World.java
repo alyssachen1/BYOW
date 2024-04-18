@@ -35,8 +35,6 @@ public class World {
         avatar.updateBoard();
     }
 
-
-
     private void generateRooms() {
         // minimum dimensions : 4x4?
         // max dimension : 10x10?
