@@ -30,6 +30,16 @@ public class World {
         //        fillWorld(currentState); //change this to fill with rooms or hallways, etc.
         generateRooms();
         generateHallways();
+        placeAvatar();
+
+    }
+
+
+    private void placeAvatar() {
+        Room startRoom = rooms.get(0);
+        int posX = startRoom.startX;
+        int posY = startRoom.startY;
+        currentState[posX][posY] = Tileset.AVATAR;
     }
 
     private void generateRooms() {
