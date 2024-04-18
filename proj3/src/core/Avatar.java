@@ -1,10 +1,16 @@
 package core;
 
+import tileengine.TETile;
+
 public class Avatar {
 
     private int WIDTH;
 
     private int GAME_HEIGHT;
+
+    private int posX;
+
+    private int posY;
 
     World world;
 
@@ -15,12 +21,20 @@ public class Avatar {
     }
 
     // has to be floor tile
-    public boolean canMove() {
+    public boolean canMove(int deltaX, int deltaY) {
+        TETile[][] t = world.currentState;
+        for (int i = 0; i < t.length; i++) {
+
+        }
         return false;
     }
 
-    public void tryMove() {
-
+    public void move(int deltaX, int deltaY) {
+        TETile[][] t = world.currentState;
+        if (canMove(deltaX, deltaY)) {
+            posX += deltaX;
+            posY += deltaY;
+        }
     }
 
 
