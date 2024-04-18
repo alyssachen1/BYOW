@@ -1,8 +1,9 @@
 package core;
+import edu.princeton.cs.algs4.StdDraw;
 import tileengine.TETile;
 import tileengine.*;
 
-import tileengine.TETile;
+import java.awt.event.KeyEvent;
 
 public class Avatar {
     private int posX;
@@ -35,8 +36,19 @@ public class Avatar {
 
 
     public void updateBoard() {
-
-
+        if (StdDraw.isKeyPressed(KeyEvent.VK_A)) {
+            move(-1, 0);
+        }
+        if (StdDraw.isKeyPressed(KeyEvent.VK_D)) {
+            move(1, 0);
+        }
+        if (StdDraw.isKeyPressed(KeyEvent.VK_S)) {
+            move(0, -1);
+        }
+        if (StdDraw.isKeyPressed(KeyEvent.VK_W)) {
+            move(0, 1);
+        }
+        world.draw((double) posX, (double) posY);
     }
 
 
