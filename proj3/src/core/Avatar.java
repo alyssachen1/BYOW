@@ -1,6 +1,6 @@
 package core;
 
-public class Movement {
+public class Avatar {
 
     private int WIDTH;
 
@@ -8,7 +8,7 @@ public class Movement {
 
     World world;
 
-    public Movement(int width, int game_height, World world) {
+    public Avatar(int width, int game_height, World world) {
         this.WIDTH = width;
         this.GAME_HEIGHT = game_height;
         this.world = world;
