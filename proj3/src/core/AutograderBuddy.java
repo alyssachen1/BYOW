@@ -31,6 +31,7 @@ public class AutograderBuddy {
         int startIndex = upperInput.indexOf('N') + 1;
         int endIndex = upperInput.indexOf('S', startIndex);
 
+        // handle :q -> quit and save
 
         String seedString = upperInput.substring(startIndex, endIndex);
         World world = new World(seedString);
