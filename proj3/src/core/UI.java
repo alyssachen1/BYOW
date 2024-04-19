@@ -35,13 +35,12 @@ public class UI {
             if (StdDraw.isKeyPressed(KeyEvent.VK_N)) {
                 // new game
                 promptSeed();
-                break;
             }
             if (StdDraw.isKeyPressed(KeyEvent.VK_L)) {
                 // load game
             }
         }
-        StdDraw.pause(20);
+        StdDraw.pause(100);
     }
 
     private void setUpCanvas() {
@@ -51,35 +50,69 @@ public class UI {
     }
 
     private void promptSeed() {
-        StdDraw.enableDoubleBuffering();
         StringBuilder seed = new StringBuilder("N");
+        boolean seedEntered = false;
+        while (!seedEntered) {
+            StdDraw.clear(StdDraw.BLACK);
+            StdDraw.text(400, 400, "Enter Seed: " + seed + "_");
+            StdDraw.show();
 
-            while (true) {
-                StdDraw.clear(StdDraw.BLACK);
+            while (!StdDraw.hasNextKeyTyped()) {
+                StdDraw.pause(50);  // Wait for a key
+            }
 
-                StdDraw.text(400, 400, "Enter Seed: " + seed.toString() + "_");
+            char key = StdDraw.nextKeyTyped();
+            if (Character.isDigit(key)) {
+                seed.append(key);
+            } else if ((key == 'S' || key == 's') && seed.length() > 1) {
+                seed.append('S');
+                StdDraw.text(405, 400, "Enter Seed: " + seed +  "_");
                 StdDraw.show();
+                StdDraw.pause(200);
+                seedEntered = true;
+                runGame(seed.toString());
+                return;
+            }
+        }
 
-                if (StdDraw.hasNextKeyTyped()) {
-                    char key = StdDraw.nextKeyTyped();
-                    if (Character.isDigit(key)) {
-                        seed.append(key);
-                    } else if ((key == 'S' || key == 's') && seed.length() > 1) {
-                        seed.append("S");
-                        StdDraw.text(400, 400, "Enter Seed: " + seed.toString() + "_");
-                        StdDraw.show();
-                        StdDraw.pause(500);
-                        break;
-                    }
-                    StdDraw.text(400, 400, "Enter Seed: " + seed.toString() + "_");
-                    StdDraw.show();
-                }
-                StdDraw.pause(50);
-            }
-            String seedValue = seed.substring(1, seed.length() - 1);
-            // generate the world with the given seed
-            World world = new World(seedValue);
-            world.runGame();
-            // ok pls do this
-            }
+    }
+    private void runGame(String seedValue) {
+        World world = new World(seedValue);
+        world.runGame();
+    }
+
+
+
+//    private void promptSeed() {
+//        StdDraw.enableDoubleBuffering();
+//        StringBuilder seed = new StringBuilder("N");
+//
+//            while (true) {
+//                StdDraw.clear(StdDraw.BLACK);
+//
+//                StdDraw.text(400, 400, "Enter Seed: " + seed.toString() + "_");
+//                StdDraw.show();
+//
+//                if (StdDraw.hasNextKeyTyped()) {
+//                    char key = StdDraw.nextKeyTyped();
+//                    if (Character.isDigit(key)) {
+//                        seed.append(key);
+//                    } else if ((key == 'S' || key == 's') && seed.length() > 1) {
+//                        seed.append("S");
+////                        StdDraw.text(400, 400, "Enter Seed: " + seed + "_");
+////                        StdDraw.show();
+////                        StdDraw.pause(500);
+//                        break;
+//                    }
+////                    StdDraw.text(400, 400, "Enter Seed: " + seed + "_");
+////                    StdDraw.show();
+//                }
+//                StdDraw.pause(50);
+//            }
+//            String seedValue = seed.substring(1, seed.length() - 1);
+//            // generate the world with the given seed
+//            World world = new World(seedValue);
+//            world.runGame();
+//            // ok pls do this
+//            }
     }

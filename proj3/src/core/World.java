@@ -36,7 +36,6 @@ public class World {
         generateHallways();
         Room startRoom = rooms.get(0);
         this.avatar = new Avatar(currentState, startRoom);
-        this.ui = new UI();
     }
 
     private void generateRooms() {
@@ -112,9 +111,26 @@ public class World {
                 avatar.updateBoard(nextKey);
             }
 
+            double mouseX = StdDraw.mouseX();
+            double mouseY = StdDraw.mouseY();
+            int x = (int) mouseX;
+            int y = (int) mouseY;
+
+            if (x >= 0 && x < DEFAULT_WIDTH && y >= 0 && y < DEFAULT_HEIGHT) {
+                TETile mouseTile = currentState[x][y];
+                hud(mouseTile);
+            }
+
+
             ter.renderFrame(currentState);
         }
 
+    }
+
+    private void hud(TETile tile) {
+        StdDraw.setPenColor(StdDraw.WHITE);
+        StdDraw.textLeft(1, 39, "Tile: " + tile.description());
+        StdDraw.show();
     }
 }
 
