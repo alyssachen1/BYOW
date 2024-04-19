@@ -13,6 +13,7 @@ public class UI {
     }
 
     private void mainMenu() {
+        StdDraw.enableDoubleBuffering();
         while (running) {
             // Clear the screen
             StdDraw.clear(StdDraw.BLACK);
@@ -37,7 +38,7 @@ public class UI {
                 // load game
             }
         }
-//        StdDraw.pause(100);
+        StdDraw.pause(20);
     }
 
     private void setUpCanvas() {
