@@ -48,7 +48,8 @@ public class UI {
     }
 
     private void promptSeed() {
-            StringBuilder seed = new StringBuilder("N");
+        StdDraw.enableDoubleBuffering();
+        StringBuilder seed = new StringBuilder("N");
 
             while (true) {
                 StdDraw.clear(StdDraw.BLACK);
@@ -76,6 +77,6 @@ public class UI {
             // generate the world with the given seed
             World world = new World(seedValue);
             // how do i save this world or idk what to do here
-            StdDraw.pause(100);
+            StdDraw.pause(20);
             }
     }
