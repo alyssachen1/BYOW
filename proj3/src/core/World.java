@@ -123,6 +123,8 @@ public class World {
                     sb.append("1");
                 } else if (currentState[x][y] == Tileset.WALL) {
                     sb.append("2");
+                } else if (currentState[x][y] == Tileset.AVATAR) {
+                    sb.append("3");
             }
             sb.append("\n");
         }
