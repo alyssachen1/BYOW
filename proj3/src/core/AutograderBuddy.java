@@ -45,26 +45,6 @@ public class AutograderBuddy {
         TETile[][] worldTiles = getWorldFromInput("N123456S");
     }
 
-    //    private static void processCommand(char command, World world) {
-    //        switch (command) {
-    //            case 'w':
-    //
-    //                break;
-    //            case 's':
-    //
-    //                break;
-    //            case 'a':
-    //
-    //                break;
-    //            case 'd':
-    //
-    //                break;
-    //            case 'q':
-    //
-    //                break;
-    //            // Add more cases as needed
-    //        }
-
 
     /**
      * Used to tell the autograder which tiles are the floor/ground (including

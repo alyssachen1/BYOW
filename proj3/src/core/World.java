@@ -20,6 +20,8 @@ public class World {
     private int numRooms;
     private Avatar avatar;
 
+    private UI ui;
+
     private ArrayList<Room> rooms;
     private static final int MIN_ROOMS = 10;
     private static final int MAX_ROOMS = 14;
@@ -34,6 +36,7 @@ public class World {
         generateHallways();
         Room startRoom = rooms.get(0);
         this.avatar = new Avatar(currentState, startRoom);
+        this.ui = new UI();
     }
 
     private void generateRooms() {
