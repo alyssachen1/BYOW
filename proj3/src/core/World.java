@@ -8,6 +8,7 @@ import edu.princeton.cs.algs4.StdDraw;
 
 import java.util.Random;
 import utils.RandomUtils;
+import utils.*;
 
 public class World {
 
@@ -19,8 +20,6 @@ public class World {
     TETile[][] currentState = new TETile[DEFAULT_WIDTH][DEFAULT_HEIGHT];
     private int numRooms;
     private Avatar avatar;
-
-    private UI ui;
 
     private ArrayList<Room> rooms;
     private static final int MIN_ROOMS = 10;
@@ -62,19 +61,6 @@ public class World {
             new Hallway(currentState, room1, room2, random);
         }
     }
-    // use Prim's algorithm to select hallways to connect two rooms
-
-
-    //helper method for generateRoom
-
-
-    //generate hallway that can connect to one room to another or only to one room
-    //    private void generateHallway(Room room, Room room) {
-    //    }
-
-
-    //check if there is enough space to generate one more room
-
 
     public void fillWithNothing() {
         for (int x = 0; x < DEFAULT_WIDTH; x++) {
@@ -84,13 +70,6 @@ public class World {
         }
     }
 
-    private TETile randomTile() {
-        int tileNum = random.nextInt(2);
-        return switch (tileNum) {
-            case 0 -> Tileset.CELL;
-            default -> Tileset.NOTHING;
-        };
-    }
 
     private long convertString(String string) {
         StringBuilder seedBuilder = new StringBuilder();
@@ -132,6 +111,40 @@ public class World {
         StdDraw.textLeft(1, 39, "Tile: " + tile.description());
         StdDraw.show();
     }
+
+    public void saveGame() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(seed).append("\n");
+        for (int y = 0; y < DEFAULT_HEIGHT; y++) {
+            for (int x = 0; x < DEFAULT_WIDTH; x++) {
+                if (currentState[x][y] == Tileset.NOTHING) {
+                    sb.append("0");
+                } else if (currentState[x][y] == Tileset.FLOOR) {
+                    sb.append("1");
+                } else if (currentState[x][y] == Tileset.WALL) {
+                    sb.append("2");
+            }
+            sb.append("\n");
+        }
+        FileUtils.writeFile(SAVE_FILE, sb.toString());
+    }
+    public void loadGame() {
+        String readFile = FileUtils.readFile(SAVE_FILE);
+        String[] lines = data.split("\n");
+        seed = lines[0];
+        random = new Random(Long.parseLong(seed));
+        currentState = new TETile[DEFAULT_WIDTH][DEFAULT_HEIGHT];
+        fillWithNothing();
+
+        for (int y = 1; y < lines.length; y++) {
+            String[] tiles = lines[y].trim().split(" ");
+            for (int x = 0; x < DEFAULT_WIDTH && x < tiles.length; x++) {
+                currentState[x][y-1] = Tileset.getTile(tiles[x]);
+            }
+        }
+        runGame();
+    }
+
 }
 
 

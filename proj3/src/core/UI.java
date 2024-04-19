@@ -30,7 +30,6 @@ public class UI {
                 running = false;
                 System.exit(0);
 //                running = false;
-
             }
             if (StdDraw.isKeyPressed(KeyEvent.VK_N)) {
                 // new game
