@@ -20,16 +20,17 @@ public class UI {
 
             // Draw the menu
             StdDraw.setPenColor(StdDraw.WHITE);
-            StdDraw.text(400, 500, "CS61B: THE GAME");
+            StdDraw.text(400, 500, "THE HORROR GAME");
             StdDraw.text(400, 400, "New Game (N)");
             StdDraw.text(400, 350, "Load Game (L)");
             StdDraw.text(400, 300, "Quit (Q)");
             StdDraw.show();
             if (StdDraw.isKeyPressed(KeyEvent.VK_Q)) {
-                // quit game
+
                 running = false;
-                System.exit(1);
-                break;
+                System.exit(0);
+//                running = false;
+
             }
             if (StdDraw.isKeyPressed(KeyEvent.VK_N)) {
                 // new game
@@ -78,7 +79,7 @@ public class UI {
             String seedValue = seed.substring(1, seed.length() - 1);
             // generate the world with the given seed
             World world = new World(seedValue);
-            // how do i save this world or idk what to do here
-            StdDraw.pause(20);
+            world.runGame();
+            // ok pls do this
             }
     }
