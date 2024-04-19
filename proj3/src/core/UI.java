@@ -28,6 +28,8 @@ public class UI {
             if (StdDraw.isKeyPressed(KeyEvent.VK_Q)) {
                 // quit game
                 running = false;
+                System.exit(1);
+                break;
             }
             if (StdDraw.isKeyPressed(KeyEvent.VK_N)) {
                 // new game
@@ -61,7 +63,7 @@ public class UI {
                     char key = StdDraw.nextKeyTyped();
                     if (Character.isDigit(key)) {
                         seed.append(key);
-                    } else if (key == 'S' && seed.length() > 1) {
+                    } else if ((key == 'S' || key == 's') && seed.length() > 1) {
                         seed.append("S");
                         StdDraw.text(400, 400, "Enter Seed: " + seed.toString() + "_");
                         StdDraw.show();
