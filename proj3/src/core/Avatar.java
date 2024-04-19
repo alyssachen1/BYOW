@@ -17,11 +17,10 @@ public class Avatar {
         this.posX = room.startX;
         this.posY = room.startY;
         world[posX][posY] = Tileset.AVATAR;
-
     }
 
     public boolean canMove(int deltaX, int deltaY) {
-        if (world[deltaX][deltaY] == Tileset.FLOOR) {
+        if (world[posX + deltaX][posY + deltaY] == Tileset.FLOOR) {
             return true;
         }
         return false;
@@ -29,26 +28,26 @@ public class Avatar {
 
     public void move(int deltaX, int deltaY) {
         if (canMove(deltaX, deltaY)) {
+            world[posX][posY] = Tileset.FLOOR;
             posX += deltaX;
             posY += deltaY;
+            world[posX][posY] = Tileset.AVATAR;
         }
     }
 
 
-    public void updateBoard() {
-        if (StdDraw.isKeyPressed(KeyEvent.VK_A)) {
+    public void updateBoard(char key) {
+        if (key == 'a' || key == 'A') {
             move(-1, 0);
         }
-        if (StdDraw.isKeyPressed(KeyEvent.VK_D)) {
+        if (key == 'd' || key == 'D') {
             move(1, 0);
         }
-        if (StdDraw.isKeyPressed(KeyEvent.VK_S)) {
+        if (key == 's' || key == 'S') {
             move(0, -1);
         }
-        if (StdDraw.isKeyPressed(KeyEvent.VK_W)) {
+        if (key == 'w' || key == 'W') {
             move(0, 1);
         }
-        world.draw((double) posX, (double) posY);
     }
-
 }

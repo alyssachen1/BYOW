@@ -4,6 +4,7 @@ import tileengine.TERenderer;
 import tileengine.TETile;
 import tileengine.Tileset;
 import java.util.ArrayList;
+import edu.princeton.cs.algs4.StdDraw;
 
 import java.util.Random;
 import utils.RandomUtils;
@@ -17,6 +18,7 @@ public class World {
     private Random random;
     TETile[][] currentState = new TETile[DEFAULT_WIDTH][DEFAULT_HEIGHT];
     private int numRooms;
+    private Avatar avatar;
 
     private ArrayList<Room> rooms;
     private static final int MIN_ROOMS = 10;
@@ -31,10 +33,8 @@ public class World {
         generateRooms();
         generateHallways();
         Room startRoom = rooms.get(0);
-        Avatar avatar = new Avatar(currentState, startRoom);
+        this.avatar = new Avatar(currentState, startRoom);
     }
-
-
 
     private void generateRooms() {
         // minimum dimensions : 4x4?
@@ -102,9 +102,17 @@ public class World {
 
     public void runGame() {
         ter.initialize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
-        ter.renderFrame(currentState);
-    }
 
+        while (true) {
+            if (StdDraw.hasNextKeyTyped()) {
+                char nextKey = StdDraw.nextKeyTyped();
+                avatar.updateBoard(nextKey);
+            }
+
+            ter.renderFrame(currentState);
+        }
+
+    }
 }
 
 
