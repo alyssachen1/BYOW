@@ -37,8 +37,7 @@ public class UI {
                 // load game
             }
         }
-
-        StdDraw.pause(100);
+//        StdDraw.pause(100);
     }
 
     private void setUpCanvas() {
@@ -56,21 +55,26 @@ public class UI {
                 StdDraw.text(400, 400, "Enter Seed: " + seed.toString() + "_");
                 StdDraw.show();
 
-
                 if (StdDraw.hasNextKeyTyped()) {
                     char key = StdDraw.nextKeyTyped();
                     if (Character.isDigit(key)) {
                         seed.append(key);
                     } else if (key == 'S' && seed.length() > 1) {
-                        seed.append(key);
+                        seed.append("S");
+                        StdDraw.text(400, 400, "Enter Seed: " + seed.toString() + "_");
+                        StdDraw.show();
+                        StdDraw.pause(500);
                         break;
                     }
+                    StdDraw.text(400, 400, "Enter Seed: " + seed.toString() + "_");
+                    StdDraw.show();
                 }
-                String seedValue = seed.substring(1, seed.length() - 1);
-                // generate the world with the given seed
-                World world = new World(seedValue);
-                StdDraw.pause(100);
-                break;
+                StdDraw.pause(50);
+            }
+            String seedValue = seed.substring(1, seed.length() - 1);
+            // generate the world with the given seed
+            World world = new World(seedValue);
+            // how do i save this world or idk what to do here
+            StdDraw.pause(100);
             }
     }
-}
