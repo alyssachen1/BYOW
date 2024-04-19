@@ -51,5 +51,4 @@ public class Avatar {
         world.draw((double) posX, (double) posY);
     }
 
-
 }
