@@ -25,10 +25,13 @@ public class World {
     private static final int MIN_ROOMS = 10;
     private static final int MAX_ROOMS = 14;
 
+    public String seed;
+
     public World(String seed) {
         ter = new TERenderer();
         this.random = new Random(convertString(seed));
         this.rooms = new ArrayList<>();
+        this.seed = seed;
         fillWithNothing(); //just added this
         //        fillWorld(currentState); //change this to fill with rooms or hallways, etc.
         generateRooms();
@@ -125,28 +128,31 @@ public class World {
                     sb.append("2");
                 } else if (currentState[x][y] == Tileset.AVATAR) {
                     sb.append("3");
+                }
+                sb.append("\n");
             }
-            sb.append("\n");
+            FileUtils.writeFile(SAVE_FILE, sb.toString());
         }
-        FileUtils.writeFile(SAVE_FILE, sb.toString());
     }
+
     public void loadGame() {
-        String readFile = FileUtils.readFile(SAVE_FILE);
-        String[] lines = data.split("\n");
-        seed = lines[0];
-        random = new Random(Long.parseLong(seed));
-        currentState = new TETile[DEFAULT_WIDTH][DEFAULT_HEIGHT];
-        fillWithNothing();
+        if (FileUtils.fileExists(SAVE_FILE)) {
+            String data = FileUtils.readFile(SAVE_FILE);
+            String[] lines = data.split("\n");
+            seed = lines[0]; // Assuming the seed is stored in the first line
+            random = new Random(Long.parseLong(seed));
+            currentState = new TETile[DEFAULT_WIDTH][DEFAULT_HEIGHT];
+            fillWithNothing();
 
-        for (int y = 1; y < lines.length; y++) {
-            String[] tiles = lines[y].trim().split(" ");
-            for (int x = 0; x < DEFAULT_WIDTH && x < tiles.length; x++) {
-                currentState[x][y-1] = Tileset.getTile(tiles[x]);
+            for (int y = 1; y < lines.length; y++) {
+                String[] tiles = lines[y].trim().split(" ");
+                for (int x = 0; x < DEFAULT_WIDTH && x < tiles.length; x++) {
+                    currentState[x][y - 1] = Tileset.getTile(Integer.parseInt(tiles[x]));
+                }
             }
+            runGame();
         }
-        runGame();
     }
-
 }
 
 
