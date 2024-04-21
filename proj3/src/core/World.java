@@ -49,7 +49,9 @@ public class World {
         generateRooms();
         generateHallways();
         Room startRoom = rooms.get(0);
-        this.avatar = new Avatar(currentState, startRoom);
+        int startX = startRoom.startX;
+        int startY = startRoom.startY;
+        this.avatar = new Avatar(currentState, startX, startY);
     }
 
     private void generateRooms() {
@@ -177,7 +179,7 @@ public class World {
                     else if (tileChar == Tileset.AVATAR.character()) {
                         board[x][height - y - 1] = Tileset.AVATAR;
                         startX = x;
-                        startY = y;
+                        startY = height - y - 1;
                     } else {
                         throw new IllegalArgumentException("Invalid tile character in file: " + tileChar);
                     }
@@ -185,6 +187,7 @@ public class World {
             }
             ter.initialize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
             this.currentState = board;
+            System.out.println(startX + "," + startY);
             this.avatar = new Avatar(currentState, startX, startY);
             ter.renderFrame(currentState);
             runGame();
