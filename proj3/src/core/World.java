@@ -3,6 +3,8 @@ package core;
 import tileengine.TERenderer;
 import tileengine.TETile;
 import tileengine.Tileset;
+
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import edu.princeton.cs.algs4.StdDraw;
 
@@ -19,7 +21,7 @@ public class World {
     private Random random;
     TETile[][] currentState = new TETile[DEFAULT_WIDTH][DEFAULT_HEIGHT];
     private int numRooms;
-    private Avatar avatar;
+    public Avatar avatar;
 
     private ArrayList<Room> rooms;
     private static final int MIN_ROOMS = 10;
@@ -27,11 +29,25 @@ public class World {
 
     private boolean lightVisible;
 
+    public String seed;
+
+    private boolean saved = false;
+
+    private boolean running = true;
+
+
+
+    public World() {
+        ter = new TERenderer();
+    }
+
+
     public World(String seed) {
         ter = new TERenderer();
         lightVisible = true;
         this.random = new Random(convertString(seed));
         this.rooms = new ArrayList<>();
+        this.seed = seed;
         fillWithNothing(); //just added this
         //        fillWorld(currentState); //change this to fill with rooms or hallways, etc.
         generateRooms();
@@ -41,10 +57,6 @@ public class World {
     }
 
     private void generateRooms() {
-        // minimum dimensions : 4x4?
-        // max dimension : 10x10?
-        // also add minimum spacing parameter between rooms (?)
-
         numRooms = RandomUtils.uniform(random, MIN_ROOMS, MAX_ROOMS);
         int attempts = 0;
         while (attempts < numRooms) {
@@ -86,8 +98,10 @@ public class World {
 
     public void runGame() {
         ter.initialize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+        running = true;
+        boolean prev = false;
 
-        while (true) {
+        while (running) {
             if (StdDraw.hasNextKeyTyped()) {
                 char nextKey = StdDraw.nextKeyTyped();
                 if (nextKey == 'p' || nextKey == 'P') {
@@ -105,7 +119,21 @@ public class World {
                 TETile mouseTile = currentState[x][y];
                 hud(mouseTile);
             }
+
             ter.renderFrame(currentState, lightVisible);
+
+            ter.renderFrame(currentState);
+
+            if (StdDraw.isKeyPressed(KeyEvent.VK_SHIFT) && StdDraw.isKeyPressed(KeyEvent.VK_SEMICOLON)) {
+                prev = true;
+            }
+            if (StdDraw.isKeyPressed(KeyEvent.VK_Q) && prev) {
+                saved = true;
+                running = false;
+                saveGame();
+                System.exit(0);
+            }
+
         }
 
     }
@@ -117,25 +145,116 @@ private void hud(TETile tile) {
     StdDraw.show();
 }
 
-public void saveGame() {
-    StringBuilder sb = new StringBuilder();
-//        sb.append(seed).append("\n");
-    for (int y = 0; y < DEFAULT_HEIGHT; y++) {
-        for (int x = 0; x < DEFAULT_WIDTH; x++) {
-            if (currentState[x][y] == Tileset.NOTHING) {
-                sb.append("0");
-            } else if (currentState[x][y] == Tileset.FLOOR) {
-                sb.append("1");
-            } else if (currentState[x][y] == Tileset.WALL) {
-                sb.append("2");
-            } else if (currentState[x][y] == Tileset.AVATAR) {
-                sb.append("3");
+//public void saveGame() {
+//    StringBuilder sb = new StringBuilder();
+////        sb.append(seed).append("\n");
+//    for (int y = 0; y < DEFAULT_HEIGHT; y++) {
+//        for (int x = 0; x < DEFAULT_WIDTH; x++) {
+//            if (currentState[x][y] == Tileset.NOTHING) {
+//                sb.append("0");
+//            } else if (currentState[x][y] == Tileset.FLOOR) {
+//                sb.append("1");
+//            } else if (currentState[x][y] == Tileset.WALL) {
+//                sb.append("2");
+//            } else if (currentState[x][y] == Tileset.AVATAR) {
+//                sb.append("3");
+//=======
+    public void saveGame() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(seed).append("\n");
+        for (int y = 0; y < DEFAULT_HEIGHT; y++) {
+            for (int x = 0; x < DEFAULT_WIDTH; x++) {
+                sb.append(currentState[x][y].character());
+                }
+                sb.append("\n");
             }
-            sb.append("\n");
-        }
-        FileUtils.writeFile(SAVE_FILE, sb.toString());
+            FileUtils.writeFile(SAVE_FILE, sb.toString());
     }
-}
+
+
+
+    public void loadGame() {
+        try {
+            String fileContents = FileUtils.readFile(SAVE_FILE);
+            String[] lines = fileContents.split("\n");
+            this.seed = lines[0];
+            this.random = new Random(convertString(this.seed));
+
+            int height = DEFAULT_HEIGHT;
+            int width = DEFAULT_WIDTH;
+
+            TETile[][] board = new TETile[width][height];
+            fillWithNothing();
+
+            for (int y = 0; y < height; y++) {
+                String row = lines[y + 1];
+                for (int x = 0; x < width; x++) {
+                    char tileChar = row.charAt(x);
+                    if (tileChar == Tileset.NOTHING.character()) {
+                        board[x][height - y - 1] = Tileset.NOTHING;
+                    }
+                    else if (tileChar == Tileset.FLOOR.character()) {
+                        board[x][height - y - 1] = Tileset.FLOOR;
+                    }
+                    else if (tileChar == Tileset.WALL.character()) {
+                        board[x][height - y - 1] = Tileset.WALL;
+                    }
+                    else if (tileChar == Tileset.AVATAR.character()) {
+                        board[x][height - y - 1] = Tileset.AVATAR;
+                    } else {
+                        throw new IllegalArgumentException("Invalid tile character in file: " + tileChar);
+                    }
+                }
+            }
+            ter.initialize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+            this.currentState = board;
+            ter.renderFrame(currentState);
+            runGame();
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        }
+    }
+
+    public void loadGamee() {
+        try {
+            String fileContents = FileUtils.readFile(SAVE_FILE);
+            String[] lines = fileContents.split("\n");
+            this.seed = lines[0];
+            this.random = new Random(convertString(this.seed));
+
+            int height = DEFAULT_HEIGHT;
+            int width = DEFAULT_WIDTH;
+
+            TETile[][] board = new TETile[width][height];
+            fillWithNothing();
+
+            for (int y = 0; y < height; y++) {
+                String row = lines[y + 1];
+                for (int x = 0; x < width; x++) {
+                    char tileChar = row.charAt(x);
+                    if (tileChar == Tileset.NOTHING.character()) {
+                        board[x][height - y - 1] = Tileset.NOTHING;
+                    }
+                    else if (tileChar == Tileset.FLOOR.character()) {
+                        board[x][height - y - 1] = Tileset.FLOOR;
+                    }
+                    else if (tileChar == Tileset.WALL.character()) {
+                        board[x][height - y - 1] = Tileset.WALL;
+                    }
+                    else if (tileChar == Tileset.AVATAR.character()) {
+                        board[x][height - y - 1] = Tileset.AVATAR;
+                    } else {
+                        throw new IllegalArgumentException("Invalid tile character in file: " + tileChar);
+                    }
+                }
+            }
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        }
+    }
 
 //    public void loadGame() {
 //        String readFile = FileUtils.readFile(SAVE_FILE);
