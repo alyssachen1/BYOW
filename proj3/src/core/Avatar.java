@@ -10,7 +10,11 @@ public class Avatar {
     private int posY;
     private TETile[][] world;
 
-
+    public Avatar(TETile[][] world, int startY, int startX) {
+        this.world = world;
+        this.posX = startX;
+        this.posY = startY;
+    }
 
     public Avatar(TETile[][] world, Room room) {
         this.world = world;

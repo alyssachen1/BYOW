@@ -147,6 +147,8 @@ public class World {
     }
 
     public void loadGame() {
+        int startX = 0;
+        int startY = 0;
         try {
             String fileContents = FileUtils.readFile(SAVE_FILE);
             String[] lines = fileContents.split("\n");
@@ -174,6 +176,8 @@ public class World {
                     }
                     else if (tileChar == Tileset.AVATAR.character()) {
                         board[x][height - y - 1] = Tileset.AVATAR;
+                        startX = x;
+                        startY = y;
                     } else {
                         throw new IllegalArgumentException("Invalid tile character in file: " + tileChar);
                     }
@@ -181,6 +185,7 @@ public class World {
             }
             ter.initialize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
             this.currentState = board;
+            this.avatar = new Avatar(currentState, startX, startY);
             ter.renderFrame(currentState);
             runGame();
 
