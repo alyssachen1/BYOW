@@ -175,7 +175,7 @@ public class World {
                         board[x][height - y - 1] = Tileset.WALL;
                     }
                     else if (tileChar == Tileset.AVATAR.character()) {
-                        board[x][height - y - 1] = Tileset.FLOOR;
+                        board[x][height - y - 1] = Tileset.AVATAR;
                         startX = x;
                         startY = y;
                     } else {
