@@ -126,11 +126,14 @@ public class World {
         sb.append(seed).append("\n");
         for (int y = 0; y < DEFAULT_HEIGHT; y++) {
             for (int x = 0; x < DEFAULT_WIDTH; x++) {
+<<<<<<< HEAD
                 sb.append(currentState[x][y].character());
             }
             sb.append("\n");
         }
         FileUtils.writeFile(SAVE_FILE, sb.toString());
+=======
+>>>>>>> parent of e1ee703 (finished save load)
                 if (currentState[x][y] == Tileset.NOTHING) {
                     sb.append("0");
                 } else if (currentState[x][y] == Tileset.FLOOR) {
@@ -143,6 +146,7 @@ public class World {
                 sb.append("\n");
             }
             FileUtils.writeFile(SAVE_FILE, sb.toString());
+        }
     }
 
     public void loadGame() {
