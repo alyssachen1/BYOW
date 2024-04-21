@@ -140,10 +140,10 @@ public class World {
         for (int y = 0; y < DEFAULT_HEIGHT; y++) {
             for (int x = 0; x < DEFAULT_WIDTH; x++) {
                 sb.append(currentState[x][y].character());
-                }
-                sb.append("\n");
             }
-            FileUtils.writeFile(SAVE_FILE, sb.toString());
+            sb.append("\n");
+        }
+        FileUtils.writeFile(SAVE_FILE, sb.toString());
     }
 
     public void loadGame() {
@@ -230,5 +230,3 @@ public class World {
     }
 
 }
-
-
