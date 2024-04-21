@@ -25,8 +25,11 @@ public class World {
     private static final int MIN_ROOMS = 10;
     private static final int MAX_ROOMS = 14;
 
+    private boolean lightVisible;
+
     public World(String seed) {
         ter = new TERenderer();
+        lightVisible = true;
         this.random = new Random(convertString(seed));
         this.rooms = new ArrayList<>();
         fillWithNothing(); //just added this
@@ -87,9 +90,12 @@ public class World {
         while (true) {
             if (StdDraw.hasNextKeyTyped()) {
                 char nextKey = StdDraw.nextKeyTyped();
-                avatar.updateBoard(nextKey);
+                if (nextKey == 'p' || nextKey == 'P') {
+                    lightVisible = !lightVisible;
+                } else {
+                    avatar.updateBoard(nextKey);
+                }
             }
-
             double mouseX = StdDraw.mouseX();
             double mouseY = StdDraw.mouseY();
             int x = (int) mouseX;
@@ -99,54 +105,54 @@ public class World {
                 TETile mouseTile = currentState[x][y];
                 hud(mouseTile);
             }
-
-
-            ter.renderFrame(currentState);
+            ter.renderFrame(currentState, lightVisible);
         }
 
     }
 
-    private void hud(TETile tile) {
-        StdDraw.setPenColor(StdDraw.WHITE);
-        StdDraw.textLeft(1, 39, "Tile: " + tile.description());
-        StdDraw.show();
-    }
 
-    public void saveGame() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(seed).append("\n");
-        for (int y = 0; y < DEFAULT_HEIGHT; y++) {
-            for (int x = 0; x < DEFAULT_WIDTH; x++) {
-                if (currentState[x][y] == Tileset.NOTHING) {
-                    sb.append("0");
-                } else if (currentState[x][y] == Tileset.FLOOR) {
-                    sb.append("1");
-                } else if (currentState[x][y] == Tileset.WALL) {
-                    sb.append("2");
-                } else if (currentState[x][y] == Tileset.AVATAR) {
-                    sb.append("3");
+private void hud(TETile tile) {
+    StdDraw.setPenColor(StdDraw.WHITE);
+    StdDraw.textLeft(1, 39, "Tile: " + tile.description());
+    StdDraw.show();
+}
+
+public void saveGame() {
+    StringBuilder sb = new StringBuilder();
+//        sb.append(seed).append("\n");
+    for (int y = 0; y < DEFAULT_HEIGHT; y++) {
+        for (int x = 0; x < DEFAULT_WIDTH; x++) {
+            if (currentState[x][y] == Tileset.NOTHING) {
+                sb.append("0");
+            } else if (currentState[x][y] == Tileset.FLOOR) {
+                sb.append("1");
+            } else if (currentState[x][y] == Tileset.WALL) {
+                sb.append("2");
+            } else if (currentState[x][y] == Tileset.AVATAR) {
+                sb.append("3");
             }
             sb.append("\n");
         }
         FileUtils.writeFile(SAVE_FILE, sb.toString());
     }
-    public void loadGame() {
-        String readFile = FileUtils.readFile(SAVE_FILE);
-        String[] lines = data.split("\n");
-        seed = lines[0];
-        random = new Random(Long.parseLong(seed));
-        currentState = new TETile[DEFAULT_WIDTH][DEFAULT_HEIGHT];
-        fillWithNothing();
+}
 
-        for (int y = 1; y < lines.length; y++) {
-            String[] tiles = lines[y].trim().split(" ");
-            for (int x = 0; x < DEFAULT_WIDTH && x < tiles.length; x++) {
-                currentState[x][y-1] = Tileset.getTile(tiles[x]);
-            }
-        }
-        runGame();
-    }
-
+//    public void loadGame() {
+//        String readFile = FileUtils.readFile(SAVE_FILE);
+//        String[] lines = data.split("\n");
+//        seed = lines[0];
+//        random = new Random(Long.parseLong(seed));
+//        currentState = new TETile[DEFAULT_WIDTH][DEFAULT_HEIGHT];
+//        fillWithNothing();
+//
+//        for (int y = 1; y < lines.length; y++) {
+//            String[] tiles = lines[y].trim().split(" ");
+//            for (int x = 0; x < DEFAULT_WIDTH && x < tiles.length; x++) {
+//                currentState[x][y - 1] = Tileset.getTile(tiles[x]);
+//            }
+//        }
+//        runGame();
+//    }
 }
 
 
