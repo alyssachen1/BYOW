@@ -137,7 +137,7 @@ public class World {
     public void saveGame() {
         StringBuilder sb = new StringBuilder();
         sb.append(seed).append("\n");
-        for (int y = 0; y < DEFAULT_HEIGHT; y++) {
+        for (int y = DEFAULT_HEIGHT - 1; y >= 0; y--) {
             for (int x = 0; x < DEFAULT_WIDTH; x++) {
                 sb.append(currentState[x][y].character());
             }
