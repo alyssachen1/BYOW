@@ -14,6 +14,7 @@ public class Avatar {
         this.world = world;
         this.posX = startX;
         this.posY = startY;
+        world[posX][posY] = Tileset.AVATAR;
     }
 
     public Avatar(TETile[][] world, Room room) {
