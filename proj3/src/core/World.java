@@ -136,23 +136,60 @@ public class World {
     }
 
     public void loadGame() {
-        if (FileUtils.fileExists(SAVE_FILE)) {
-            String data = FileUtils.readFile(SAVE_FILE);
-            String[] lines = data.split("\n");
-            seed = lines[0]; // Assuming the seed is stored in the first line
-            random = new Random(Long.parseLong(seed));
-            currentState = new TETile[DEFAULT_WIDTH][DEFAULT_HEIGHT];
+//        if (FileUtils.fileExists(SAVE_FILE)) {
+//            String data = FileUtils.readFile(SAVE_FILE);
+//            String[] lines = data.split("\n");
+//            seed = lines[0]; // Assuming the seed is stored in the first line
+//            random = new Random(Long.parseLong(seed));
+//            currentState = new TETile[DEFAULT_WIDTH][DEFAULT_HEIGHT];
+//            fillWithNothing();
+//
+//            for (int y = 1; y < lines.length; y++) {
+//                String[] tiles = lines[y].trim().split(" ");
+//                for (int x = 0; x < DEFAULT_WIDTH && x < tiles.length; x++) {
+//                    currentState[x][y - 1] = Tileset.getTile(Integer.parseInt(tiles[x]));
+//                }
+//            }
+//            runGame();
+//        }
+        try {
+            String fileContents = FileUtils.readFile(SAVE_FILE);
+
+
+            String[] lines = fileContents.split("\n");
+            if (lines.length < 2) {
+                throw new IllegalArgumentException("Invalid file format or empty file.");
+            }
+
+            String[] dimensions = lines[0].split(" ");
+            if (dimensions.length != 2) {
+                throw new IllegalArgumentException("Invalid dimensions line in file.");
+            }
+            int width = Integer.parseInt(dimensions[0]);
+            int height = Integer.parseInt(dimensions[1]);
+
+            TETile[][] board = new TETile[width][height];
             fillWithNothing();
 
-            for (int y = 1; y < lines.length; y++) {
-                String[] tiles = lines[y].trim().split(" ");
-                for (int x = 0; x < DEFAULT_WIDTH && x < tiles.length; x++) {
-                    currentState[x][y - 1] = Tileset.getTile(Integer.parseInt(tiles[x]));
+            for (int y = 0; y < height; y++) {
+                String row = lines[y + 1];
+                for (int x = 0; x < width; x++) {
+                    char tileChar = row.charAt(x);
+                    if (tileChar == '1') {
+                        board[x][height - y - 1] = Tileset.CELL;
+                    } else {
+                        throw new IllegalArgumentException("Invalid tile character in file: " + tileChar);
+                    }
                 }
             }
-            runGame();
+            this.currentState = board;
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
         }
     }
+
 }
 
 
