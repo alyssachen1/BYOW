@@ -27,6 +27,12 @@ public class World {
 
     public String seed;
 
+    public World() {
+        ter = new TERenderer();
+        this.random = new Random(convertString(seed));
+
+    }
+
     public World(String seed) {
         ter = new TERenderer();
         this.random = new Random(convertString(seed));
@@ -157,16 +163,8 @@ public class World {
 
 
             String[] lines = fileContents.split("\n");
-            if (lines.length < 2) {
-                throw new IllegalArgumentException("Invalid file format or empty file.");
-            }
-
-            String[] dimensions = lines[0].split(" ");
-            if (dimensions.length != 2) {
-                throw new IllegalArgumentException("Invalid dimensions line in file.");
-            }
-            int width = Integer.parseInt(dimensions[0]);
-            int height = Integer.parseInt(dimensions[1]);
+            int height = DEFAULT_HEIGHT;
+            int width = DEFAULT_WIDTH;
 
             TETile[][] board = new TETile[width][height];
             fillWithNothing();
@@ -175,14 +173,24 @@ public class World {
                 String row = lines[y + 1];
                 for (int x = 0; x < width; x++) {
                     char tileChar = row.charAt(x);
-                    if (tileChar == '1') {
-                        board[x][height - y - 1] = Tileset.CELL;
+                    if (tileChar == '0') {
+                        board[x][height - y - 1] = Tileset.NOTHING;
+                    }
+                    else if (tileChar == '1') {
+                        board[x][height - y - 1] = Tileset.FLOOR;
+                    }
+                    else if (tileChar == '2') {
+                        board[x][height - y - 1] = Tileset.WALL;
+                    }
+                    else if (tileChar == '3') {
+                        board[x][height - y - 1] = Tileset.AVATAR;
                     } else {
                         throw new IllegalArgumentException("Invalid tile character in file: " + tileChar);
                     }
                 }
             }
             this.currentState = board;
+            ter.renderFrame(currentState);
 
         } catch (Exception e) {
 

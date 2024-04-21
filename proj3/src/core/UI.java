@@ -14,6 +14,7 @@ public class UI {
 
     private void mainMenu() {
         StdDraw.enableDoubleBuffering();
+        World world;
         while (running) {
             // Clear the screen
             StdDraw.clear(StdDraw.BLACK);
@@ -26,7 +27,6 @@ public class UI {
             StdDraw.text(400, 300, "Quit (Q)");
             StdDraw.show();
             if (StdDraw.isKeyPressed(KeyEvent.VK_Q)) {
-
                 running = false;
                 System.exit(0);
             }
@@ -36,6 +36,7 @@ public class UI {
             }
             if (StdDraw.isKeyPressed(KeyEvent.VK_L)) {
                 // load game
+                world.loadGame();
             }
         }
         StdDraw.pause(100);
@@ -64,7 +65,7 @@ public class UI {
                 seed.append(key);
             } else if ((key == 'S' || key == 's') && seed.length() > 1) {
                 seed.append('S');
-                StdDraw.text(405, 400, "Enter Seed: " + seed +  "_");
+                StdDraw.text(405, 400, "Enter Seed: " + seed + "_");
                 StdDraw.show();
                 StdDraw.pause(200);
                 seedEntered = true;
@@ -74,43 +75,17 @@ public class UI {
         }
 
     }
+
     private void runGame(String seedValue) {
         World world = new World(seedValue);
-        world.runGame();
+        while (running) {
+            world.runGame();
+            if (StdDraw.isKeyPressed(KeyEvent.VK_Q)) {
+                running = false;
+                world.saveGame();
+                System.exit(0);
+            }
+
+        }
     }
-
-
-
-//    private void promptSeed() {
-//        StdDraw.enableDoubleBuffering();
-//        StringBuilder seed = new StringBuilder("N");
-//
-//            while (true) {
-//                StdDraw.clear(StdDraw.BLACK);
-//
-//                StdDraw.text(400, 400, "Enter Seed: " + seed.toString() + "_");
-//                StdDraw.show();
-//
-//                if (StdDraw.hasNextKeyTyped()) {
-//                    char key = StdDraw.nextKeyTyped();
-//                    if (Character.isDigit(key)) {
-//                        seed.append(key);
-//                    } else if ((key == 'S' || key == 's') && seed.length() > 1) {
-//                        seed.append("S");
-////                        StdDraw.text(400, 400, "Enter Seed: " + seed + "_");
-////                        StdDraw.show();
-////                        StdDraw.pause(500);
-//                        break;
-//                    }
-////                    StdDraw.text(400, 400, "Enter Seed: " + seed + "_");
-////                    StdDraw.show();
-//                }
-//                StdDraw.pause(50);
-//            }
-//            String seedValue = seed.substring(1, seed.length() - 1);
-//            // generate the world with the given seed
-//            World world = new World(seedValue);
-//            world.runGame();
-//            // ok pls do this
-//            }
-    }
+}
