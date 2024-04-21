@@ -68,7 +68,7 @@ public class TERenderer {
      * given in units of tiles.
      *
      *              positions   xOffset |xOffset+1|xOffset+2| .... |xOffset+world.length
-     *                     
+     *
      * startY+world[0].length   [0][M-1] | [1][M-1] | [2][M-1] | .... | [N-1][M-1]
      *                    ...    ......  |  ......  |  ......  | .... | ......
      *               startY+2    [0][2]  |  [1][2]  |  [2][2]  | .... | [N-1][2]
@@ -82,51 +82,26 @@ public class TERenderer {
      * the screen in tiles.
      * @param world the 2D TETile[][] array to render
      */
-//    public void renderFrame(TETile[][] world) {
-//        StdDraw.clear(new Color(0, 0, 0));
-//        drawTiles(world);
-//        StdDraw.show();
-//    }
-
-    public void renderFrame(TETile[][] world,  boolean applyVisibility) {
+    public void renderFrame(TETile[][] world) {
         StdDraw.clear(new Color(0, 0, 0));
-        drawTiles(world, applyVisibility);
+        drawTiles(world);
         StdDraw.show();
     }
-
 
     /**
      * Draws all world tiles without clearing the canvas or showing the tiles.
      * @param world the 2D TETile[][] array to render
      */
-//    public void drawTiles(TETile[][] world) {
-//        int numXTiles = world.length;
-//        int numYTiles = world[0].length;
-//        for (int x = 0; x < numXTiles; x += 1) {
-//            for (int y = 0; y < numYTiles; y += 1) {
-//                if (world[x][y] == null) {
-//                    throw new IllegalArgumentException("Tile at position x=" + x + ", y=" + y
-//                            + " is null.");
-//                }
-//                world[x][y].draw(x + xOffset, y + yOffset);
-//            }
-//        }
-//    }
-
-    private void drawTiles(TETile[][] world, boolean applyVisibility) {
+    public void drawTiles(TETile[][] world) {
         int numXTiles = world.length;
         int numYTiles = world[0].length;
-        for (int x = 0; x < numXTiles; x++) {
-            for (int y = 0; y < numYTiles; y++) {
+        for (int x = 0; x < numXTiles; x += 1) {
+            for (int y = 0; y < numYTiles; y += 1) {
                 if (world[x][y] == null) {
-                    throw new IllegalArgumentException("Tile at position x=" + x + ", y=" + y + " is null.");
+                    throw new IllegalArgumentException("Tile at position x=" + x + ", y=" + y
+                            + " is null.");
                 }
-                if (applyVisibility) {
-                    world[x][y].draw(x + xOffset, y + yOffset);
-                } else {
-                    StdDraw.setPenColor(StdDraw.DARK_GRAY);
-                    StdDraw.filledSquare(x + xOffset + 0.5, y + yOffset + 0.5, 0.5);
-                }
+                world[x][y].draw(x + xOffset, y + yOffset);
             }
         }
     }
