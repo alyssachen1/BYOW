@@ -19,62 +19,22 @@ public class AutograderBuddy {
      * @param input the input string to feed to your program
      * @return the 2D TETile[][] representing the state of the world
      */
-//    public static TETile[][] getWorldFromInput(String input) {
-//
-//        if (input == null || input.isEmpty()) {
-//            throw new IllegalArgumentException("Input string is null or empty.");
-//        }
-//
-//        // Case insensitivity
-//        String upperInput = input.toUpperCase();
-//
-//        int startIndex = upperInput.indexOf('N') + 1;
-//        int endIndex = upperInput.indexOf('S', startIndex);
-//
-//        // handle :q -> quit and save
-//
-//        String seedString = upperInput.substring(startIndex, endIndex);
-//        World world = new World(seedString);
-//        return world.currentState;
-//    }
     public static TETile[][] getWorldFromInput(String input) {
         // N#####S
         if (input == null || input.isEmpty()) {
             throw new IllegalArgumentException("Input string is null or empty.");
         }
 
+        // Case insensitivity
         String upperInput = input.toUpperCase();
-        World world;
-        int endIndex;
+
         int startIndex = upperInput.indexOf('N') + 1;
+        int endIndex = upperInput.indexOf('S', startIndex);
 
+        // handle :q -> quit and save
 
-        if (upperInput.startsWith("N")) {
-            endIndex = upperInput.indexOf('S', startIndex);
-            String seedString = upperInput.substring(startIndex, endIndex);
-            world = new World(seedString);
-        } else if (upperInput.startsWith("L")) {
-            world = new World();
-            world.loadGamee();
-            endIndex = 1;
-        } else {
-            throw new IllegalArgumentException("Input string must start with 'N' or 'L'.");
-        }
-
-        for (int i = endIndex + 1; i < upperInput.length(); i++) {
-            char command = upperInput.charAt(i);
-            if (command == ':') {
-                if (i + 1 < upperInput.length() && upperInput.charAt(i + 1) == 'Q') {
-                    world.saveGame();
-                    break;
-                } else {
-                    throw new IllegalArgumentException("Invalid command in input string.");
-                }
-            } else {
-                world.avatar.updateBoard(command);
-            }
-        }
-
+        String seedString = upperInput.substring(startIndex, endIndex);
+        World world = new World(seedString);
         return world.currentState;
     }
 

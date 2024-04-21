@@ -21,7 +21,7 @@ public class World {
     private Random random;
     TETile[][] currentState = new TETile[DEFAULT_WIDTH][DEFAULT_HEIGHT];
     private int numRooms;
-    public Avatar avatar;
+    private Avatar avatar;
 
     private ArrayList<Room> rooms;
     private static final int MIN_ROOMS = 10;
@@ -53,6 +53,10 @@ public class World {
     }
 
     private void generateRooms() {
+        // minimum dimensions : 4x4?
+        // max dimension : 10x10?
+        // also add minimum spacing parameter between rooms (?)
+
         numRooms = RandomUtils.uniform(random, MIN_ROOMS, MAX_ROOMS);
         int attempts = 0;
         while (attempts < numRooms) {
@@ -230,3 +234,4 @@ public class World {
     }
 
 }
+
