@@ -21,7 +21,7 @@ public class World {
     private Random random;
     TETile[][] currentState = new TETile[DEFAULT_WIDTH][DEFAULT_HEIGHT];
     private int numRooms;
-    private Avatar avatar;
+    public Avatar avatar;
 
     private ArrayList<Room> rooms;
     private static final int MIN_ROOMS = 10;
@@ -53,10 +53,6 @@ public class World {
     }
 
     private void generateRooms() {
-        // minimum dimensions : 4x4?
-        // max dimension : 10x10?
-        // also add minimum spacing parameter between rooms (?)
-
         numRooms = RandomUtils.uniform(random, MIN_ROOMS, MAX_ROOMS);
         int attempts = 0;
         while (attempts < numRooms) {
@@ -188,6 +184,45 @@ public class World {
             ter.renderFrame(currentState);
             runGame();
 
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        }
+    }
+
+    public void loadGamee() {
+        try {
+            String fileContents = FileUtils.readFile(SAVE_FILE);
+            String[] lines = fileContents.split("\n");
+            this.seed = lines[0];
+            this.random = new Random(convertString(this.seed));
+
+            int height = DEFAULT_HEIGHT;
+            int width = DEFAULT_WIDTH;
+
+            TETile[][] board = new TETile[width][height];
+            fillWithNothing();
+
+            for (int y = 0; y < height; y++) {
+                String row = lines[y + 1];
+                for (int x = 0; x < width; x++) {
+                    char tileChar = row.charAt(x);
+                    if (tileChar == Tileset.NOTHING.character()) {
+                        board[x][height - y - 1] = Tileset.NOTHING;
+                    }
+                    else if (tileChar == Tileset.FLOOR.character()) {
+                        board[x][height - y - 1] = Tileset.FLOOR;
+                    }
+                    else if (tileChar == Tileset.WALL.character()) {
+                        board[x][height - y - 1] = Tileset.WALL;
+                    }
+                    else if (tileChar == Tileset.AVATAR.character()) {
+                        board[x][height - y - 1] = Tileset.AVATAR;
+                    } else {
+                        throw new IllegalArgumentException("Invalid tile character in file: " + tileChar);
+                    }
+                }
+            }
         } catch (Exception e) {
 
             e.printStackTrace();
