@@ -54,6 +54,10 @@ public class World {
         this.avatar = new Avatar(currentState, startX, startY);
     }
 
+    public void none() {
+        return;
+    }
+
     private void generateRooms() {
         numRooms = RandomUtils.uniform(random, MIN_ROOMS, MAX_ROOMS);
         int attempts = 0;
