@@ -122,7 +122,6 @@ public class World {
 
             ter.renderFrame(currentState, lightVisible);
 
-            ter.renderFrame(currentState);
 
             if (StdDraw.isKeyPressed(KeyEvent.VK_SHIFT) && StdDraw.isKeyPressed(KeyEvent.VK_SEMICOLON)) {
                 prev = true;
@@ -208,7 +207,7 @@ private void hud(TETile tile) {
             }
             ter.initialize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
             this.currentState = board;
-            ter.renderFrame(currentState);
+            ter.renderFrame(currentState, lightVisible);
             runGame();
 
         } catch (Exception e) {
