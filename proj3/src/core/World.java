@@ -3,6 +3,8 @@ package core;
 import tileengine.TERenderer;
 import tileengine.TETile;
 import tileengine.Tileset;
+
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import edu.princeton.cs.algs4.StdDraw;
 
@@ -27,10 +29,14 @@ public class World {
 
     public String seed;
 
+    private boolean saved = false;
+
+    private boolean running = true;
+
+
+
     public World() {
         ter = new TERenderer();
-        this.random = new Random(convertString(seed));
-
     }
 
     public World(String seed) {
@@ -92,8 +98,10 @@ public class World {
 
     public void runGame() {
         ter.initialize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+        running = true;
+        boolean prev = false;
 
-        while (true) {
+        while (running) {
             if (StdDraw.hasNextKeyTyped()) {
                 char nextKey = StdDraw.nextKeyTyped();
                 avatar.updateBoard(nextKey);
@@ -109,8 +117,17 @@ public class World {
                 hud(mouseTile);
             }
 
-
             ter.renderFrame(currentState);
+
+            if (StdDraw.isKeyPressed(KeyEvent.VK_SHIFT) && StdDraw.isKeyPressed(KeyEvent.VK_SEMICOLON)) {
+                prev = true;
+            }
+            if (StdDraw.isKeyPressed(KeyEvent.VK_Q) && prev) {
+                saved = true;
+                running = false;
+                saveGame();
+                System.exit(0);
+            }
         }
 
     }
@@ -126,43 +143,20 @@ public class World {
         sb.append(seed).append("\n");
         for (int y = 0; y < DEFAULT_HEIGHT; y++) {
             for (int x = 0; x < DEFAULT_WIDTH; x++) {
-                if (currentState[x][y] == Tileset.NOTHING) {
-                    sb.append("0");
-                } else if (currentState[x][y] == Tileset.FLOOR) {
-                    sb.append("1");
-                } else if (currentState[x][y] == Tileset.WALL) {
-                    sb.append("2");
-                } else if (currentState[x][y] == Tileset.AVATAR) {
-                    sb.append("3");
+                sb.append(currentState[x][y].character());
                 }
                 sb.append("\n");
             }
             FileUtils.writeFile(SAVE_FILE, sb.toString());
-        }
     }
 
     public void loadGame() {
-//        if (FileUtils.fileExists(SAVE_FILE)) {
-//            String data = FileUtils.readFile(SAVE_FILE);
-//            String[] lines = data.split("\n");
-//            seed = lines[0]; // Assuming the seed is stored in the first line
-//            random = new Random(Long.parseLong(seed));
-//            currentState = new TETile[DEFAULT_WIDTH][DEFAULT_HEIGHT];
-//            fillWithNothing();
-//
-//            for (int y = 1; y < lines.length; y++) {
-//                String[] tiles = lines[y].trim().split(" ");
-//                for (int x = 0; x < DEFAULT_WIDTH && x < tiles.length; x++) {
-//                    currentState[x][y - 1] = Tileset.getTile(Integer.parseInt(tiles[x]));
-//                }
-//            }
-//            runGame();
-//        }
         try {
             String fileContents = FileUtils.readFile(SAVE_FILE);
-
-
             String[] lines = fileContents.split("\n");
+            this.seed = lines[0];
+            this.random = new Random(convertString(this.seed));
+
             int height = DEFAULT_HEIGHT;
             int width = DEFAULT_WIDTH;
 
@@ -173,24 +167,26 @@ public class World {
                 String row = lines[y + 1];
                 for (int x = 0; x < width; x++) {
                     char tileChar = row.charAt(x);
-                    if (tileChar == '0') {
+                    if (tileChar == Tileset.NOTHING.character()) {
                         board[x][height - y - 1] = Tileset.NOTHING;
                     }
-                    else if (tileChar == '1') {
+                    else if (tileChar == Tileset.FLOOR.character()) {
                         board[x][height - y - 1] = Tileset.FLOOR;
                     }
-                    else if (tileChar == '2') {
+                    else if (tileChar == Tileset.WALL.character()) {
                         board[x][height - y - 1] = Tileset.WALL;
                     }
-                    else if (tileChar == '3') {
+                    else if (tileChar == Tileset.AVATAR.character()) {
                         board[x][height - y - 1] = Tileset.AVATAR;
                     } else {
                         throw new IllegalArgumentException("Invalid tile character in file: " + tileChar);
                     }
                 }
             }
+            ter.initialize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
             this.currentState = board;
             ter.renderFrame(currentState);
+            runGame();
 
         } catch (Exception e) {
 

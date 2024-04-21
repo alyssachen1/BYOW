@@ -7,6 +7,8 @@ import java.awt.event.KeyEvent;
 public class UI {
     private boolean running = true;
 
+    private boolean saved = false;
+
     public UI() {
         setUpCanvas();
         mainMenu();
@@ -14,12 +16,9 @@ public class UI {
 
     private void mainMenu() {
         StdDraw.enableDoubleBuffering();
-        World world;
-        while (running) {
-            // Clear the screen
+        while (true) {
             StdDraw.clear(StdDraw.BLACK);
 
-            // Draw the menu
             StdDraw.setPenColor(StdDraw.WHITE);
             StdDraw.text(400, 500, "THE HORROR GAME");
             StdDraw.text(400, 400, "New Game (N)");
@@ -27,19 +26,16 @@ public class UI {
             StdDraw.text(400, 300, "Quit (Q)");
             StdDraw.show();
             if (StdDraw.isKeyPressed(KeyEvent.VK_Q)) {
-                running = false;
                 System.exit(0);
             }
             if (StdDraw.isKeyPressed(KeyEvent.VK_N)) {
-                // new game
                 promptSeed();
             }
             if (StdDraw.isKeyPressed(KeyEvent.VK_L)) {
-                // load game
-                world.loadGame();
+                runLoad();
             }
         }
-        StdDraw.pause(100);
+//        StdDraw.pause(100);
     }
 
     private void setUpCanvas() {
@@ -57,7 +53,7 @@ public class UI {
             StdDraw.show();
 
             while (!StdDraw.hasNextKeyTyped()) {
-                StdDraw.pause(50);  // Wait for a key
+                StdDraw.pause(50);
             }
 
             char key = StdDraw.nextKeyTyped();
@@ -70,7 +66,6 @@ public class UI {
                 StdDraw.pause(200);
                 seedEntered = true;
                 runGame(seed.toString());
-                return;
             }
         }
 
@@ -78,14 +73,13 @@ public class UI {
 
     private void runGame(String seedValue) {
         World world = new World(seedValue);
-        while (running) {
-            world.runGame();
-            if (StdDraw.isKeyPressed(KeyEvent.VK_Q)) {
-                running = false;
-                world.saveGame();
-                System.exit(0);
-            }
-
-        }
+        world.runGame();
     }
+
+    private void runLoad() {
+        World world = new World();
+        world.loadGame();
+    }
+
 }
+
