@@ -134,12 +134,31 @@ public class World {
 
     }
 
-    private void runGamee(String input) {
-        running = true;
+    public void runGamee(String input) {
         boolean prev = false;
 
-        while (running) {
-
+        for (int i = 0; i < input.length(); i++) {
+            if (input.charAt(i) == ':') {
+                prev = true;
+            }
+            else if (input.charAt(i) == 'Q' && prev) {
+                return;
+            }
+            else if (input.charAt(i) == 'L') {
+                loadGamee();
+            }
+            else if (input.charAt(i) == 'W') {
+                avatar.move(0, 1);
+            }
+            else if (input.charAt(i) == 'A') {
+                avatar.move(-1, 0);
+            }
+            else if (input.charAt(i) == 'S') {
+                avatar.move(0, -1);
+            }
+            else if (input.charAt(i) == 'D') {
+                avatar.move(0, 1);
+            }
         }
     }
 
