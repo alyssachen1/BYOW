@@ -152,7 +152,7 @@ public class World {
             } else if (input.charAt(i) == 'S') {
                 avatar.move(0, -1);
             } else if (input.charAt(i) == 'D') {
-                avatar.move(0, 1);
+                avatar.move(1, 0);
             }
         }
     }

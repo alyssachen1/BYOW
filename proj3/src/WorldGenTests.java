@@ -31,16 +31,16 @@ public class WorldGenTests {
     @Test
     public void basicSaveTest() {
         // TODO: write a test that calls getWorldFromInput twice, with "n123swasd:q" and with "lwasd"
-        TETile[][] tiles1 = AutograderBuddy.getWorldFromInput("n123swasd:q");
+        TETile[][] tiles1 = AutograderBuddy.getWorldFromInput("n12345swasd:q");
         TERenderer ter = new TERenderer();
         ter.initialize(tiles1.length, tiles1[0].length);
         ter.renderFrame(tiles1);
-        StdDraw.pause(5000);
+        StdDraw.pause(1000);
 
-        TETile[][] tiles2 = AutograderBuddy.getWorldFromInput("lwasd");
+        TETile[][] tiles2 = AutograderBuddy.getWorldFromInput("lww:q");
         TERenderer ter2 = new TERenderer();
         ter2.initialize(tiles2.length, tiles2[0].length);
         ter2.renderFrame(tiles2);
-//        StdDraw.pause(5000);
+        StdDraw.pause(1000);
     }
 }
