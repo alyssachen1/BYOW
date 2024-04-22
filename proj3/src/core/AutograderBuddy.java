@@ -37,12 +37,13 @@ public class AutograderBuddy {
             World world = new World(seedString);
             world.runGameFromInput(restInput);
             return world.currentState;
-        }
-
-        if (input.charAt(0) == 'L') {
+        } else {
             String restInput = upperInput.substring(1);
+            World world = new World();
+            world.loadGamee();
+            world.runGameFromInput(restInput);
+            return world.currentState;
         }
-        return;
     }
 
 
