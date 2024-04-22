@@ -101,15 +101,16 @@ public class World {
     }
 
     public void runGame() {
+        StdDraw.enableDoubleBuffering();
         ter.initialize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
         running = true;
         boolean prev = false;
+        StdDraw.setPenColor(StdDraw.WHITE);
+        StdDraw.textLeft(1, 38, "Press P to toggle light");
 
         while (running) {
 
-            StdDraw.setPenColor(StdDraw.WHITE);
             StdDraw.textLeft(1, 38, "Press P to toggle light");
-            StdDraw.show();
 
             if (StdDraw.hasNextKeyTyped()) {
                 char nextKey = StdDraw.nextKeyTyped();
@@ -142,11 +143,14 @@ public class World {
                 saveGame();
                 System.exit(0);
             }
+            StdDraw.show();
+//            StdDraw.pause(100);
         }
 
     }
 
     private void hud(TETile tile) {
+        StdDraw.enableDoubleBuffering();
         StdDraw.setPenColor(StdDraw.WHITE);
         StdDraw.textLeft(1, 39, "Tile: " + tile.description());
         StdDraw.show();

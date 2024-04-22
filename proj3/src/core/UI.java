@@ -1,6 +1,11 @@
 package core;
 import edu.princeton.cs.algs4.StdDraw;
-
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
+import java.io.File;
+import java.io.IOException;
 import java.awt.event.KeyEvent;
 
 
@@ -24,6 +29,7 @@ public class UI {
             StdDraw.text(400, 400, "New Game (N)");
             StdDraw.text(400, 350, "Load Game (L)");
             StdDraw.text(400, 300, "Quit (Q)");
+            StdDraw.text(400, 250, "Custom Avatar (C)");
             StdDraw.show();
             if (StdDraw.isKeyPressed(KeyEvent.VK_Q)) {
                 System.exit(0);
@@ -33,6 +39,9 @@ public class UI {
             }
             if (StdDraw.isKeyPressed(KeyEvent.VK_L)) {
                 runLoad();
+            }
+            if (StdDraw.isKeyPressed(KeyEvent.VK_C)) {
+                customAvatar();
             }
         }
         //        StdDraw.pause(100);
@@ -69,6 +78,35 @@ public class UI {
             }
         }
 
+    }
+
+    public void customAvatar() {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Select an avatar image");
+        fileChooser.setAcceptAllFileFilterUsed(false);
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Image files", "jpg", "png", "gif");
+        fileChooser.addChoosableFileFilter(filter);
+
+        int result = fileChooser.showOpenDialog(null);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            try {
+                BufferedImage avatarImage = ImageIO.read(selectedFile);
+                StdDraw.picture(400, 400, "your_avatar.png", 100, 100);
+                saveAvatarImage(avatarImage);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void saveAvatarImage(BufferedImage image) {
+        try {
+            File outputfile = new File("saved_avatar.png");
+            ImageIO.write(image, "png", outputfile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void runGame(String seedValue) {
