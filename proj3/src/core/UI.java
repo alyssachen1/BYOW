@@ -35,7 +35,7 @@ public class UI {
                 runLoad();
             }
         }
-//        StdDraw.pause(100);
+        //        StdDraw.pause(100);
     }
 
     private void setUpCanvas() {

@@ -1,9 +1,7 @@
 package core;
-import edu.princeton.cs.algs4.StdDraw;
 import tileengine.TETile;
 import tileengine.*;
 
-import java.awt.event.KeyEvent;
 
 public class Avatar {
     private int posX;
@@ -17,13 +15,13 @@ public class Avatar {
         world[posX][posY] = Tileset.AVATAR;
     }
 
-//    public Avatar(TETile[][] world, Room room) {
-//        this.world = world;
-//        this.posX = room.startX;
-//        this.posY = room.startY;
-//        Avatar avatar = new Avatar(world, posX, posY);
-////        world[posX][posY] = Tileset.AVATAR;
-//    }
+    //    public Avatar(TETile[][] world, Room room) {
+    //        this.world = world;
+    //        this.posX = room.startX;
+    //        this.posY = room.startY;
+    //        Avatar avatar = new Avatar(world, posX, posY);
+    ////        world[posX][posY] = Tileset.AVATAR;
+    //    }
 
     public boolean canMove(int deltaX, int deltaY) {
         if (world[posX + deltaX][posY + deltaY] == Tileset.FLOOR) {
