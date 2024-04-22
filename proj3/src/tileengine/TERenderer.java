@@ -88,10 +88,34 @@ public class TERenderer {
         StdDraw.show();
     }
 
+    //original renderFrame
+//    public void renderFrame(TETile[][] world) {
+//        StdDraw.clear(new Color(0, 0, 0));
+//        drawTiles(world);
+//        StdDraw.show();
+//    }
+
     /**
      * Draws all world tiles without clearing the canvas or showing the tiles.
      * @param world the 2D TETile[][] array to render
      */
+
+
+    //Original drawTiles
+
+//    public void drawTiles(TETile[][] world) {
+//        int numXTiles = world.length;
+//        int numYTiles = world[0].length;
+//        for (int x = 0; x < numXTiles; x += 1) {
+//            for (int y = 0; y < numYTiles; y += 1) {
+//                if (world[x][y] == null) {
+//                    throw new IllegalArgumentException("Tile at position x=" + x + ", y=" + y
+//                            + " is null.");
+//                }
+//                world[x][y].draw(x + xOffset, y + yOffset);
+//            }
+//        }
+//    }
     public void drawTiles(TETile[][] world, boolean lineOfSight, boolean[][] isVisible) {
         int numXTiles = world.length;
         int numYTiles = world[0].length;
@@ -102,6 +126,9 @@ public class TERenderer {
                             + " is null.");
                 } else if (!lineOfSight || isVisible[x][y]) {
                     world[x][y].draw(x + xOffset, y + yOffset);
+                } else {
+                    StdDraw.setPenColor(StdDraw.BLACK);
+                    StdDraw.filledSquare(x + xOffset + 0.5, y + yOffset + 0.5, 0.5);
                 }
 //                } else if (!lineOfSight && isVisible[x][y]) {
 //                    world[x][y].draw(x + xOffset, y + yOffset);

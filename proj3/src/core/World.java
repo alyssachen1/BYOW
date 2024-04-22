@@ -102,26 +102,22 @@ public class World {
 
     public void runGame() {
         ter.initialize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+        StdDraw.enableDoubleBuffering(); // Ensure this is called once
         running = true;
         boolean prev = false;
 
         while (running) {
+            //process input
+            handleInput();
 
-            StdDraw.setPenColor(StdDraw.WHITE);
-            StdDraw.textLeft(1, 38, "Press P to toggle light");
-            StdDraw.show();
+            //update state
+            updateVisibility();
+            //clear draw
+            StdDraw.clear();
+            //render all game elements
+            ter.renderFrame(currentState, applyLOS, visibility);
 
-            if (StdDraw.hasNextKeyTyped()) {
-                char nextKey = StdDraw.nextKeyTyped();
-                if (nextKey == 'p' || nextKey == 'P') {
-                    applyLOS = !applyLOS;
-                    updateVisibility();
-                } else {
-                    avatar.updateBoard(nextKey);
-                    updateVisibility();
-                }
-            }
-
+            //draw hud
             double mouseX = StdDraw.mouseX();
             double mouseY = StdDraw.mouseY();
             int x = (int) mouseX;
@@ -130,26 +126,40 @@ public class World {
             if (x >= 0 && x < DEFAULT_WIDTH && y >= 0 && y < DEFAULT_HEIGHT) {
                 TETile mouseTile = currentState[x][y];
                 hud(mouseTile);
-            }
-            ter.renderFrame(currentState, applyLOS, visibility);
 
-            if (StdDraw.isKeyPressed(KeyEvent.VK_SHIFT) && StdDraw.isKeyPressed(KeyEvent.VK_SEMICOLON)) {
-                prev = true;
-            }
-            if (StdDraw.isKeyPressed(KeyEvent.VK_Q) && prev) {
-                saved = true;
-                running = false;
-                saveGame();
-                System.exit(0);
+                //show std draw
+                StdDraw.show();
+
+
+                //post frame processing
+                if (StdDraw.isKeyPressed(KeyEvent.VK_SHIFT) && StdDraw.isKeyPressed(KeyEvent.VK_SEMICOLON)) {
+                    prev = true;
+                }
+                if (StdDraw.isKeyPressed(KeyEvent.VK_Q) && prev) {
+                    saved = true;
+                    running = false;
+                    saveGame();
+                    System.exit(0);
+                }
             }
         }
-
     }
+
+    private void handleInput() {
+        if (StdDraw.hasNextKeyTyped()) {
+            char nextKey = StdDraw.nextKeyTyped();
+            if (nextKey == 'p' || nextKey == 'P') {
+                applyLOS = !applyLOS;
+            }
+            avatar.updateBoard(nextKey);
+        }
+    }
+
 
     private void hud(TETile tile) {
         StdDraw.setPenColor(StdDraw.WHITE);
         StdDraw.textLeft(1, 39, "Tile: " + tile.description());
-        StdDraw.show();
+        StdDraw.text(70, 39, "Press P to toggle light");
     }
 
     public void runGameFromInput(String input) {
@@ -273,21 +283,17 @@ public class World {
                 visibility[x][y] = false;
             }
         }
-        int radius = 3;
-        for (int deltaX = -radius; deltaX <= radius; deltaX++) {
-            for (int deltaY = -radius; deltaY <= radius; deltaY++) {
+        for (int deltaX = -4; deltaX <= 4; deltaX++) {
+            for (int deltaY = -4; deltaY <= 4; deltaY++) {
                 int losX = avatar.posX + deltaX;
                 int losY = avatar.posY + deltaY;
                 if (losX >= 0 && losY >= 0 && losX < DEFAULT_WIDTH && losY < DEFAULT_HEIGHT) {
-                    if (Math.sqrt((deltaX * deltaX) + (deltaY * deltaY)) <= radius) {
+                    if (Math.sqrt((deltaX * deltaX) + (deltaY * deltaY)) <= 4) {
                         visibility[losX][losY] = true;
                     }
                 }
             }
         }
     }
-
-
-
 }
 
