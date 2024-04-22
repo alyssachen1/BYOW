@@ -21,24 +21,28 @@ public class AutograderBuddy {
      */
     public static TETile[][] getWorldFromInput(String input) {
         // N#####S
-
-
         // N12345SW:Q
         if (input == null || input.isEmpty()) {
             throw new IllegalArgumentException("Input string is null or empty.");
         }
-
         // Case insensitivity
         String upperInput = input.toUpperCase();
 
-        int startIndex = upperInput.indexOf('N') + 1;
-        int endIndex = upperInput.indexOf('S', startIndex);
-        String restInput = upperInput.substring(endIndex + 1);
-//        System.out.print(restInput);
-        String seedString = upperInput.substring(startIndex, endIndex);
-        World world = new World(seedString);
-        world.runGamee(restInput);
-        return world.currentState;
+        if (input.charAt(0) != 'L') {
+            int startIndex = upperInput.indexOf('N') + 1;
+            int endIndex = upperInput.indexOf('S', startIndex);
+
+            String restInput = upperInput.substring(endIndex + 1);
+            String seedString = upperInput.substring(startIndex, endIndex);
+            World world = new World(seedString);
+            world.runGameFromInput(restInput);
+            return world.currentState;
+        }
+
+        if (input.charAt(0) == 'L') {
+            String restInput = upperInput.substring(1);
+        }
+        return;
     }
 
 

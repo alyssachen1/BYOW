@@ -134,7 +134,7 @@ public class World {
 
     }
 
-    public void runGamee(String input) {
+    public void runGameFromInput(String input) {
         boolean prev = false;
 
         for (int i = 0; i < input.length(); i++) {
@@ -146,9 +146,6 @@ public class World {
             }
             else if (i == 0 && input.charAt(i) == 'Q') {
                 return;
-            }
-            else if (input.charAt(i) == 'L') {
-                loadGamee();
             }
             else if (input.charAt(i) == 'W') {
                 avatar.move(0, 1);
