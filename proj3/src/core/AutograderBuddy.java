@@ -27,8 +27,7 @@ public class AutograderBuddy {
         }
         // Case insensitivity
         String upperInput = input.toUpperCase();
-
-        if (input.charAt(0) != 'L') {
+        if (upperInput.charAt(0) != 'L') {
             int startIndex = upperInput.indexOf('N') + 1;
             int endIndex = upperInput.indexOf('S', startIndex);
 
@@ -50,6 +49,7 @@ public class AutograderBuddy {
 
     public static void main(String[] args) {
         TETile[][] worldTiles = getWorldFromInput("N123456SASD:Q");
+        worldTiles = getWorldFromInput("L");
     }
 
 
