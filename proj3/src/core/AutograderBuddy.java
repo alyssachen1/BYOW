@@ -21,6 +21,9 @@ public class AutograderBuddy {
      */
     public static TETile[][] getWorldFromInput(String input) {
         // N#####S
+
+
+        // N12345SW:Q
         if (input == null || input.isEmpty()) {
             throw new IllegalArgumentException("Input string is null or empty.");
         }

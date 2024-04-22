@@ -52,27 +52,6 @@ public class Room {
         }
     }
 
-
-
-
-    //    private void roomShape(double x, double y, double width, double height) {
-    //        int methodNumber = random.nextInt(3) + 1; // Generates 1, 2, or 3
-    //
-    //        switch (methodNumber) {
-    //            case 1:
-    //                StdDraw.filledSquare(x, y, width / 2);
-    //                break;
-    //            case 2:
-    //                StdDraw.filledRectangle(x, y, width / 2, height / 2);
-    //                break;
-    //            case 3:
-    //                StdDraw.filledCircle(x, y, height / 2);
-    //                break;
-    //            default:
-    //                System.out.println("Invalid method number");
-    //        }
-    //    }
-
     public boolean isValidLocation() {
         for (int x = startX - 1; x <= startX + width + 1; x++) {
             for (int y = startY - 1; y <= startY + height + 1; y++) {
