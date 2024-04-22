@@ -141,6 +141,7 @@ public class World {
             if (input.charAt(i) == ':') {
                 prev = true;
             } else if (input.charAt(i) == 'Q' && prev) {
+                saveGame();
                 return;
             } else if (i == 0 && input.charAt(i) == 'Q') {
                 return;
