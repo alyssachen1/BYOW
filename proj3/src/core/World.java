@@ -16,7 +16,7 @@ public class World {
 
     public static final int DEFAULT_WIDTH = 80;
     public static final int DEFAULT_HEIGHT = 40;
-    private static final String SAVE_FILE = "src/save.txt";
+    private static final String SAVE_FILE = "save.txt";
     private TERenderer ter;
     private Random random;
     TETile[][] currentState = new TETile[DEFAULT_WIDTH][DEFAULT_HEIGHT];
