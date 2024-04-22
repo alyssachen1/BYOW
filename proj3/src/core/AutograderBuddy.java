@@ -40,8 +40,7 @@ public class AutograderBuddy {
         } else {
             String restInput = upperInput.substring(1);
             World world = new World();
-            world.loadGamee();
-            world.runGameFromInput(restInput);
+            world.loadGamee(restInput);
             return world.currentState;
         }
     }

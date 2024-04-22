@@ -214,7 +214,7 @@ public class World {
         runGame();
     }
 
-    public void loadGamee() {
+    public void loadGamee(String input) {
         int startX = 0;
         int startY = 0;
         String fileContents = FileUtils.readFile(SAVE_FILE);
@@ -249,6 +249,7 @@ public class World {
         }
         this.currentState = board;
         this.avatar = new Avatar(currentState, startX, startY);
+        runGameFromInput(input);
     }
 
 }
