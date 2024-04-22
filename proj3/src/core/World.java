@@ -21,13 +21,13 @@ public class World {
     private Random random;
     TETile[][] currentState = new TETile[DEFAULT_WIDTH][DEFAULT_HEIGHT];
     private int numRooms;
-    public Avatar avatar;
+    Avatar avatar;
 
     private ArrayList<Room> rooms;
     private static final int MIN_ROOMS = 10;
     private static final int MAX_ROOMS = 14;
 
-    public String seed;
+    String seed;
 
     private boolean saved = false;
 
@@ -140,23 +140,17 @@ public class World {
         for (int i = 0; i < input.length(); i++) {
             if (input.charAt(i) == ':') {
                 prev = true;
-            }
-            else if (input.charAt(i) == 'Q' && prev) {
+            } else if (input.charAt(i) == 'Q' && prev) {
                 return;
-            }
-            else if (i == 0 && input.charAt(i) == 'Q') {
+            } else if (i == 0 && input.charAt(i) == 'Q') {
                 return;
-            }
-            else if (input.charAt(i) == 'W') {
+            } else if (input.charAt(i) == 'W') {
                 avatar.move(0, 1);
-            }
-            else if (input.charAt(i) == 'A') {
+            } else if (input.charAt(i) == 'A') {
                 avatar.move(-1, 0);
-            }
-            else if (input.charAt(i) == 'S') {
+            } else if (input.charAt(i) == 'S') {
                 avatar.move(0, -1);
-            }
-            else if (input.charAt(i) == 'D') {
+            } else if (input.charAt(i) == 'D') {
                 avatar.move(0, 1);
             }
         }
@@ -183,92 +177,78 @@ public class World {
     public void loadGame() {
         int startX = 0;
         int startY = 0;
-        try {
-            String fileContents = FileUtils.readFile(SAVE_FILE);
-            String[] lines = fileContents.split("\n");
-            this.seed = lines[0];
-            this.random = new Random(convertString(this.seed));
+        String fileContents = FileUtils.readFile(SAVE_FILE);
+        String[] lines = fileContents.split("\n");
+        this.seed = lines[0];
+        this.random = new Random(convertString(this.seed));
 
-            int height = DEFAULT_HEIGHT;
-            int width = DEFAULT_WIDTH;
+        int height = DEFAULT_HEIGHT;
+        int width = DEFAULT_WIDTH;
 
-            TETile[][] board = new TETile[width][height];
-            fillWithNothing();
+        TETile[][] board = new TETile[width][height];
+        fillWithNothing();
 
-            for (int y = 0; y < height; y++) {
-                String row = lines[y + 1];
-                for (int x = 0; x < width; x++) {
-                    char tileChar = row.charAt(x);
-                    if (tileChar == Tileset.NOTHING.character()) {
-                        board[x][height - y - 1] = Tileset.NOTHING;
-                    }
-                    else if (tileChar == Tileset.FLOOR.character()) {
-                        board[x][height - y - 1] = Tileset.FLOOR;
-                    }
-                    else if (tileChar == Tileset.WALL.character()) {
-                        board[x][height - y - 1] = Tileset.WALL;
-                    }
-                    else if (tileChar == Tileset.AVATAR.character()) {
-                        board[x][height - y - 1] = Tileset.AVATAR;
-                        startX = x;
-                        startY = height - y - 1;
-                    } else {
-                        throw new IllegalArgumentException("Invalid tile character in file: " + tileChar);
-                    }
+        for (int y = 0; y < height; y++) {
+            String row = lines[y + 1];
+            for (int x = 0; x < width; x++) {
+                char tileChar = row.charAt(x);
+                if (tileChar == Tileset.NOTHING.character()) {
+                    board[x][height - y - 1] = Tileset.NOTHING;
+                } else if (tileChar == Tileset.FLOOR.character()) {
+                    board[x][height - y - 1] = Tileset.FLOOR;
+                } else if (tileChar == Tileset.WALL.character()) {
+                    board[x][height - y - 1] = Tileset.WALL;
+                } else if (tileChar == Tileset.AVATAR.character()) {
+                    board[x][height - y - 1] = Tileset.AVATAR;
+                    startX = x;
+                    startY = height - y - 1;
+                } else {
+                    throw new IllegalArgumentException("Invalid tile character in file: " + tileChar);
                 }
             }
-            ter.initialize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
-            this.currentState = board;
-            this.avatar = new Avatar(currentState, startX, startY);
-            ter.renderFrame(currentState);
-            runGame();
-
-        } catch (Exception e) {
-
-            e.printStackTrace();
         }
+        ter.initialize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+        this.currentState = board;
+        this.avatar = new Avatar(currentState, startX, startY);
+        ter.renderFrame(currentState);
+        runGame();
     }
 
     public void loadGamee() {
         int startX = 0;
         int startY = 0;
-        try {
-            String fileContents = FileUtils.readFile(SAVE_FILE);
-            String[] lines = fileContents.split("\n");
-            this.seed = lines[0];
-            this.random = new Random(convertString(this.seed));
+        String fileContents = FileUtils.readFile(SAVE_FILE);
+        String[] lines = fileContents.split("\n");
+        this.seed = lines[0];
+        this.random = new Random(convertString(this.seed));
 
-            int height = DEFAULT_HEIGHT;
-            int width = DEFAULT_WIDTH;
+        int height = DEFAULT_HEIGHT;
+        int width = DEFAULT_WIDTH;
 
-            TETile[][] board = new TETile[width][height];
-            fillWithNothing();
+        TETile[][] board = new TETile[width][height];
+        fillWithNothing();
 
-            for (int y = 0; y < height; y++) {
-                String row = lines[y + 1];
-                for (int x = 0; x < width; x++) {
-                    char tileChar = row.charAt(x);
-                    if (tileChar == Tileset.NOTHING.character()) {
-                        board[x][height - y - 1] = Tileset.NOTHING;
-                    } else if (tileChar == Tileset.FLOOR.character()) {
-                        board[x][height - y - 1] = Tileset.FLOOR;
-                    } else if (tileChar == Tileset.WALL.character()) {
-                        board[x][height - y - 1] = Tileset.WALL;
-                    } else if (tileChar == Tileset.AVATAR.character()) {
-                        board[x][height - y - 1] = Tileset.AVATAR;
-                        startX = x;
-                        startY = height - y - 1;
-                    } else {
-                        throw new IllegalArgumentException("Invalid tile character in file: " + tileChar);
-                    }
+        for (int y = 0; y < height; y++) {
+            String row = lines[y + 1];
+            for (int x = 0; x < width; x++) {
+                char tileChar = row.charAt(x);
+                if (tileChar == Tileset.NOTHING.character()) {
+                    board[x][height - y - 1] = Tileset.NOTHING;
+                } else if (tileChar == Tileset.FLOOR.character()) {
+                    board[x][height - y - 1] = Tileset.FLOOR;
+                } else if (tileChar == Tileset.WALL.character()) {
+                    board[x][height - y - 1] = Tileset.WALL;
+                } else if (tileChar == Tileset.AVATAR.character()) {
+                    board[x][height - y - 1] = Tileset.AVATAR;
+                    startX = x;
+                    startY = height - y - 1;
+                } else {
+                    throw new IllegalArgumentException("Invalid tile character in file: " + tileChar);
                 }
             }
-            this.currentState = board;
-            this.avatar = new Avatar(currentState, startX, startY);
-        } catch (Exception e) {
-
-            e.printStackTrace();
         }
+        this.currentState = board;
+        this.avatar = new Avatar(currentState, startX, startY);
     }
 
 }
