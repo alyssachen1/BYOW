@@ -34,7 +34,6 @@ public class World {
     private boolean running = true;
 
 
-
     public World() {
         ter = new TERenderer();
     }
