@@ -160,7 +160,7 @@ public class World {
         StdDraw.enableDoubleBuffering();
         StdDraw.setPenColor(StdDraw.WHITE);
         StdDraw.textLeft(1, 39, "Tile: " + tile.description());
-        StdDraw.text(70, 39, "Press P to toggle light");
+        StdDraw.text(73, 39, "Press P to toggle light");
     }
 
     public void runGameFromInput(String input) {
