@@ -101,10 +101,13 @@ public class World {
     }
 
     public void runGame() {
+        StdDraw.enableDoubleBuffering();
         ter.initialize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
         StdDraw.enableDoubleBuffering(); // Ensure this is called once
         running = true;
         boolean prev = false;
+        StdDraw.setPenColor(StdDraw.WHITE);
+        StdDraw.textLeft(1, 38, "Press P to toggle light");
 
         while (running) {
             //process input
@@ -126,9 +129,10 @@ public class World {
             if (x >= 0 && x < DEFAULT_WIDTH && y >= 0 && y < DEFAULT_HEIGHT) {
                 TETile mouseTile = currentState[x][y];
                 hud(mouseTile);
+            }
 
                 //show std draw
-                StdDraw.show();
+            StdDraw.show();
 
 
                 //post frame processing
@@ -142,6 +146,7 @@ public class World {
                     System.exit(0);
                 }
             }
+
         }
     }
 
@@ -157,6 +162,7 @@ public class World {
 
 
     private void hud(TETile tile) {
+        StdDraw.enableDoubleBuffering();
         StdDraw.setPenColor(StdDraw.WHITE);
         StdDraw.textLeft(1, 39, "Tile: " + tile.description());
         StdDraw.text(70, 39, "Press P to toggle light");
