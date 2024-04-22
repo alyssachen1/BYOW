@@ -4,8 +4,9 @@ import tileengine.*;
 
 
 public class Avatar {
-    private int posX;
-    private int posY;
+    public int posX;
+
+    public int posY;
     private TETile[][] world;
 
     public Avatar(TETile[][] world, int startX, int startY) {

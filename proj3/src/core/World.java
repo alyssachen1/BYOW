@@ -20,6 +20,8 @@ public class World {
     private TERenderer ter;
     private Random random;
     TETile[][] currentState = new TETile[DEFAULT_WIDTH][DEFAULT_HEIGHT];
+    private boolean[][] visibility;
+    private boolean applyLOS;
     private int numRooms;
     Avatar avatar;
 
@@ -36,21 +38,21 @@ public class World {
 
     public World() {
         ter = new TERenderer();
+        this.visibility = new boolean[DEFAULT_WIDTH][DEFAULT_HEIGHT];
     }
 
     public World(String seed) {
         ter = new TERenderer();
+        this.applyLOS = false;
+        this.visibility = new boolean[DEFAULT_WIDTH][DEFAULT_HEIGHT];
         this.random = new Random(convertString(seed));
         this.rooms = new ArrayList<>();
         this.seed = seed;
-        fillWithNothing(); //just added this
-        //        fillWorld(currentState); //change this to fill with rooms or hallways, etc.
+        fillWithNothing();
         generateRooms();
         generateHallways();
         Room startRoom = rooms.get(0);
-        int startX = startRoom.startX;
-        int startY = startRoom.startY;
-        this.avatar = new Avatar(currentState, startX, startY);
+        this.avatar = new Avatar(currentState, startRoom.startX, startRoom.startY);
     }
 
     public void none() {
@@ -82,6 +84,7 @@ public class World {
         for (int x = 0; x < DEFAULT_WIDTH; x++) {
             for (int y = 0; y < DEFAULT_HEIGHT; y++) {
                 currentState[x][y] = Tileset.NOTHING;
+                visibility[x][y] = false;
             }
         }
     }
@@ -103,9 +106,20 @@ public class World {
         boolean prev = false;
 
         while (running) {
+
+            StdDraw.setPenColor(StdDraw.WHITE);
+            StdDraw.textLeft(1, 38, "Press P to toggle light");
+            StdDraw.show();
+
             if (StdDraw.hasNextKeyTyped()) {
                 char nextKey = StdDraw.nextKeyTyped();
-                avatar.updateBoard(nextKey);
+                if (nextKey == 'p' || nextKey == 'P') {
+                    applyLOS = !applyLOS;
+                    updateVisibility();
+                } else {
+                    avatar.updateBoard(nextKey);
+                    updateVisibility();
+                }
             }
 
             double mouseX = StdDraw.mouseX();
@@ -117,8 +131,7 @@ public class World {
                 TETile mouseTile = currentState[x][y];
                 hud(mouseTile);
             }
-
-            ter.renderFrame(currentState);
+            ter.renderFrame(currentState, applyLOS, visibility);
 
             if (StdDraw.isKeyPressed(KeyEvent.VK_SHIFT) && StdDraw.isKeyPressed(KeyEvent.VK_SEMICOLON)) {
                 prev = true;
@@ -131,6 +144,12 @@ public class World {
             }
         }
 
+    }
+
+    private void hud(TETile tile) {
+        StdDraw.setPenColor(StdDraw.WHITE);
+        StdDraw.textLeft(1, 39, "Tile: " + tile.description());
+        StdDraw.show();
     }
 
     public void runGameFromInput(String input) {
@@ -156,11 +175,6 @@ public class World {
         }
     }
 
-    private void hud(TETile tile) {
-        StdDraw.setPenColor(StdDraw.WHITE);
-        StdDraw.textLeft(1, 39, "Tile: " + tile.description());
-        StdDraw.show();
-    }
 
     public void saveGame() {
         StringBuilder sb = new StringBuilder();
@@ -210,7 +224,7 @@ public class World {
         ter.initialize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
         this.currentState = board;
         this.avatar = new Avatar(currentState, startX, startY);
-        ter.renderFrame(currentState);
+        ter.renderFrame(currentState, applyLOS, visibility);
         runGame();
     }
 
@@ -251,6 +265,29 @@ public class World {
         this.avatar = new Avatar(currentState, startX, startY);
         runGameFromInput(input);
     }
+
+
+    private void updateVisibility() {
+        for (int x = 0; x < DEFAULT_WIDTH; x++) {
+            for (int y = 0; y < DEFAULT_HEIGHT; y++) {
+                visibility[x][y] = false;
+            }
+        }
+        int radius = 3;
+        for (int deltaX = -radius; deltaX <= radius; deltaX++) {
+            for (int deltaY = -radius; deltaY <= radius; deltaY++) {
+                int losX = avatar.posX + deltaX;
+                int losY = avatar.posY + deltaY;
+                if (losX >= 0 && losY >= 0 && losX < DEFAULT_WIDTH && losY < DEFAULT_HEIGHT) {
+                    if (Math.sqrt((deltaX * deltaX) + (deltaY * deltaY)) <= radius) {
+                        visibility[losX][losY] = true;
+                    }
+                }
+            }
+        }
+    }
+
+
 
 }
 
