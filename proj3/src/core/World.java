@@ -103,11 +103,8 @@ public class World {
     public void runGame() {
         StdDraw.enableDoubleBuffering();
         ter.initialize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
-        StdDraw.enableDoubleBuffering(); // Ensure this is called once
         running = true;
         boolean prev = false;
-        StdDraw.setPenColor(StdDraw.WHITE);
-        StdDraw.textLeft(1, 38, "Press P to toggle light");
 
         while (running) {
             //process input
@@ -131,22 +128,20 @@ public class World {
                 hud(mouseTile);
             }
 
-                //show std draw
+            //show std draw
             StdDraw.show();
 
 
-                //post frame processing
-                if (StdDraw.isKeyPressed(KeyEvent.VK_SHIFT) && StdDraw.isKeyPressed(KeyEvent.VK_SEMICOLON)) {
-                    prev = true;
-                }
-                if (StdDraw.isKeyPressed(KeyEvent.VK_Q) && prev) {
-                    saved = true;
-                    running = false;
-                    saveGame();
-                    System.exit(0);
-                }
+            //post frame processing
+            if (StdDraw.isKeyPressed(KeyEvent.VK_SHIFT) && StdDraw.isKeyPressed(KeyEvent.VK_SEMICOLON)) {
+                prev = true;
             }
-
+            if (StdDraw.isKeyPressed(KeyEvent.VK_Q) && prev) {
+                saved = true;
+                running = false;
+                saveGame();
+                System.exit(0);
+            }
         }
     }
 
