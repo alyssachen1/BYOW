@@ -144,6 +144,9 @@ public class World {
             else if (input.charAt(i) == 'Q' && prev) {
                 return;
             }
+            else if (i == 0 && input.charAt(i) == 'Q') {
+                return;
+            }
             else if (input.charAt(i) == 'L') {
                 loadGamee();
             }
