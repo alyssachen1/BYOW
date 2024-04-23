@@ -21,9 +21,11 @@ public class Avatar {
     public boolean canMove(int deltaX, int deltaY) {
         TETile nextPos = world[posX + deltaX][posY + deltaY];
         if (nextPos == Tileset.FLOOR || nextPos == Tileset.TREE) {
-            return true;
+            if (world[posX + deltaX][posY + deltaY] == Tileset.CAT_EYE) {
+                return true;
+            }
+            return false;
         }
-        return false;
     }
 
     public void move(int deltaX, int deltaY) {
@@ -43,7 +45,7 @@ public class Avatar {
 
     public void movee(int deltaX, int deltaY) {
         if (canMove(deltaX, deltaY)) {
-            world[posX][posY] = Tileset.FLOOR;
+            world[posX][posY] = Tileset.CAT_EYE;
             posX += deltaX;
             posY += deltaY;
             world[posX][posY] = Tileset.FLOWER;
@@ -71,9 +73,6 @@ public class Avatar {
             }
         }
     }
-
-
-
 
     public void updateBoard(char key) {
         if (key == 'a' || key == 'A') {

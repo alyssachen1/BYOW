@@ -37,7 +37,7 @@ public class Room {
     private void fillFloor() {
         for (int x = startX; x < startX + width; x++) {
             for (int y = startY; y < startY + height; y++) {
-                world[x][y] = Tileset.FLOOR;
+                world[x][y] = Tileset.CAT_EYE;
             }
         }
     }
@@ -47,7 +47,7 @@ public class Room {
             for (int y = startY - 1; y < startY + height; y++) {
                 if ((x == startX - 1 || x == startX + width - 1 || y == startY - 1 || y == startY + height - 1)) {
                     world[x][y] = Tileset.NOTHING;
-                    world[x][y] = Tileset.WALL;
+                    world[x][y] = Tileset.ROCK_WALL;
                 }
             }
         }
