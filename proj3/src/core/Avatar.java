@@ -12,6 +12,8 @@ public class Avatar {
     public int posY;
     private TETile[][] world;
 
+    public static boolean finished = false;
+
     public Avatar(TETile[][] world, int startX, int startY) {
         this.world = world;
         this.posX = startX;

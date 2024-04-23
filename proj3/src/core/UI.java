@@ -11,7 +11,7 @@ import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
 import java.awt.event.KeyEvent;
-
+import utils.*;
 
 public class UI {
     private boolean customAvatar = false;
@@ -39,9 +39,6 @@ public class UI {
                 promptSeed();
             }
             if (StdDraw.isKeyPressed(KeyEvent.VK_L)) {
-                if (World.SAVE_FILE.length() == 0) {
-                    System.exit(0);
-                }
                 runLoad();
             }
 //            if (StdDraw.isKeyPressed(KeyEvent.VK_C)) {
@@ -128,8 +125,13 @@ public class UI {
     }
 
     private void runLoad() {
-        World world = new World();
-        world.loadGame();
+        String content = FileUtils.readFile(World.SAVE_FILE);
+        if (content.trim().isEmpty()) {
+            System.exit(0); // Exit if the save file is empty
+        } else {
+            World world = new World();
+            world.loadGame();
+        }
     }
 
 }
