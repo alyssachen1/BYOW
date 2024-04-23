@@ -29,7 +29,7 @@ public class Avatar {
         public void move(int deltaX, int deltaY) {
             TETile nextPos = world[posX + deltaX][posY + deltaY];
             if (canMove(deltaX, deltaY)) {
-                world[posX][posY] = Tileset.FLOOR;
+                world[posX][posY] = Tileset.CAT_EYE;
                 posX += deltaX;
                 posY += deltaY;
                 world[posX][posY] = Tileset.FLOWER;
@@ -43,7 +43,7 @@ public class Avatar {
 
         public void movee(int deltaX, int deltaY) {
             if (canMove(deltaX, deltaY)) {
-                world[posX][posY] = Tileset.FLOOR;
+                world[posX][posY] = Tileset.CAT_EYE;
                 posX += deltaX;
                 posY += deltaY;
                 world[posX][posY] = Tileset.FLOWER;
