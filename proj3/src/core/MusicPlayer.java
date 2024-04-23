@@ -18,4 +18,22 @@ public class MusicPlayer {
             e.printStackTrace();
         }
     }
+
+    public static void playSoundEffect(String file) {
+        playSound(file, 0); // Play only once
+    }
+
+    private static void playSound(String file, int loopCount) {
+        try {
+            File audioFile = new File(file);
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioStream);
+
+            clip.loop(loopCount);
+            clip.start();
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            e.printStackTrace();
+        }
+    }
 }

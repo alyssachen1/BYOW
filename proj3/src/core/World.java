@@ -31,8 +31,6 @@ public class World {
 
     String seed;
 
-    private boolean saved = false;
-
     private boolean running = true;
 
 
@@ -53,10 +51,6 @@ public class World {
         generateHallways();
         Room startRoom = rooms.get(0);
         this.avatar = new Avatar(currentState, startRoom.startX, startRoom.startY);
-    }
-
-    public void none() {
-        return;
     }
 
     private void generateRooms() {
@@ -137,7 +131,6 @@ public class World {
                 prev = true;
             }
             if (StdDraw.isKeyPressed(KeyEvent.VK_Q) && prev) {
-                saved = true;
                 running = false;
                 saveGame();
                 System.exit(0);

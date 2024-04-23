@@ -5,7 +5,6 @@ import tileengine.*;
 
 public class Avatar {
     public int posX;
-
     public int posY;
     private TETile[][] world;
 
@@ -15,14 +14,6 @@ public class Avatar {
         this.posY = startY;
         world[posX][posY] = Tileset.AVATAR;
     }
-
-    //    public Avatar(TETile[][] world, Room room) {
-    //        this.world = world;
-    //        this.posX = room.startX;
-    //        this.posY = room.startY;
-    //        Avatar avatar = new Avatar(world, posX, posY);
-    ////        world[posX][posY] = Tileset.AVATAR;
-    //    }
 
     public boolean canMove(int deltaX, int deltaY) {
         if (world[posX + deltaX][posY + deltaY] == Tileset.FLOOR) {
@@ -37,6 +28,7 @@ public class Avatar {
             posX += deltaX;
             posY += deltaY;
             world[posX][posY] = Tileset.AVATAR;
+            MusicPlayer.playSoundEffect("path/to/walking_sound.wav");
         }
     }
 
