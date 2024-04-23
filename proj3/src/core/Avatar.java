@@ -35,7 +35,8 @@ public class Avatar {
                 posY += deltaY;
                 world[posX][posY] = Tileset.FLOWER;
                 if (nextPos == Tileset.TREE) {
-                    MusicPlayer.playSoundEffect("src/hotel-bill-ding-1-174457.wav");
+                    MusicPlayer.playSoundEffect("src/decidemp3-14575.wav");
+                    StdDraw.pause(1000);
                     finishGame();
                 }
 
@@ -49,7 +50,6 @@ public class Avatar {
                 posX += deltaX;
                 posY += deltaY;
                 world[posX][posY] = Tileset.FLOWER;
-                MusicPlayer.playSoundEffect("src/walking-96582.wav");
             }
         }
 
@@ -58,9 +58,9 @@ public class Avatar {
         StdDraw.setXscale(0, 800);
         StdDraw.setYscale(0, 800);
         StdDraw.enableDoubleBuffering();
+        MusicPlayer.playMusic("src/scary-music-box-for-spooky-scenes-165983.wav");
 
         while (true) {
-            MusicPlayer.playSoundEffect("src/scary-music-box-for-spooky-scenes-165983.wav");
             StdDraw.clear(StdDraw.BLACK);
             StdDraw.setPenColor(StdDraw.WHITE);
             StdDraw.text(400, 500, "CONGRATULATIONS! YOU'VE FINISHED THE GAME");

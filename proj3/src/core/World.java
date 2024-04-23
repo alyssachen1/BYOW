@@ -114,6 +114,7 @@ public class World {
         ter.initialize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
         running = true;
         boolean prev = false;
+        MusicPlayer.playMusic("src/horror-background-atmosphere-156462.wav");
 
         while (running) {
             handleInput();

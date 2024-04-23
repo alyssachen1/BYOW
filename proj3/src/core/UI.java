@@ -13,6 +13,7 @@ public class UI {
     }
 
     private void mainMenu() {
+        MusicPlayer.playMusic("src/Dark Ambient - Horror Background Music No Copyright (1).wav");
         StdDraw.enableDoubleBuffering();
         while (true) {
             StdDraw.clear(StdDraw.BLACK);
@@ -27,6 +28,7 @@ public class UI {
                 System.exit(0);
             }
             if (StdDraw.isKeyPressed(KeyEvent.VK_N)) {
+                StdDraw.pause(100);
                 promptSeed();
             }
             if (StdDraw.isKeyPressed(KeyEvent.VK_L)) {
