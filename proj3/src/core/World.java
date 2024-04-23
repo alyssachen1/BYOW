@@ -146,7 +146,7 @@ public class World {
         StdDraw.setPenColor(StdDraw.WHITE);
         StdDraw.textLeft(1, 39, "Tile: " + tile.description());
         StdDraw.text(73, 39, "Press P to toggle light");
-        StdDraw.text(73, 29, "Try to find the tree!");
+        StdDraw.text(73, 37, "Try to find the tree!");
     }
 
     public void runGameFromInput(String input) {
@@ -205,10 +205,10 @@ public class World {
                 char tileChar = row.charAt(x);
                 if (tileChar == Tileset.NOTHING.character()) {
                     board[x][height - y - 1] = Tileset.NOTHING;
-                } else if (tileChar == Tileset.FLOOR.character()) {
-                    board[x][height - y - 1] = Tileset.FLOOR;
-                } else if (tileChar == Tileset.WALL.character()) {
-                    board[x][height - y - 1] = Tileset.WALL;
+                } else if (tileChar == Tileset.CAT_EYE.character()) {
+                    board[x][height - y - 1] = Tileset.CAT_EYE;
+                } else if (tileChar == Tileset.ROCK_WALL.character()) {
+                    board[x][height - y - 1] = Tileset.ROCK_WALL;
                 } else if (tileChar == Tileset.FLOWER.character()) {
                     board[x][height - y - 1] = Tileset.FLOWER;
                     startX = x;
@@ -245,10 +245,10 @@ public class World {
                 char tileChar = row.charAt(x);
                 if (tileChar == Tileset.NOTHING.character()) {
                     board[x][height - y - 1] = Tileset.NOTHING;
-                } else if (tileChar == Tileset.FLOOR.character()) {
-                    board[x][height - y - 1] = Tileset.FLOOR;
-                } else if (tileChar == Tileset.WALL.character()) {
-                    board[x][height - y - 1] = Tileset.WALL;
+                } else if (tileChar == Tileset.CAT_EYE.character()) {
+                    board[x][height - y - 1] = Tileset.CAT_EYE;
+                } else if (tileChar == Tileset.ROCK_WALL.character()) {
+                    board[x][height - y - 1] = Tileset.ROCK_WALL;
                 } else if (tileChar == Tileset.FLOWER.character()) {
                     board[x][height - y - 1] = Tileset.FLOWER;
                     startX = x;
