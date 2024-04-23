@@ -24,32 +24,33 @@ public class Avatar {
             if (world[posX + deltaX][posY + deltaY] == Tileset.CAT_EYE) {
                 return true;
             }
-            return false;
+            if (world[posX + deltaX][posY + deltaY] == Tileset.FLOOR) {
+                return true;
+            }
         }
         return false;
     }
 
     public void move(int deltaX, int deltaY) {
+        if (canMove(deltaX, deltaY)) {
+            world[posX][posY] = Tileset.CAT_EYE;
+            posX += deltaX;
+            posY += deltaY;
+            world[posX][posY] = Tileset.FLOWER;
+            MusicPlayer.playSoundEffect("src/walking-96582.wav");
+        }
+    }
+
+    public void movee(int deltaX, int deltaY) {
         TETile nextPos = world[posX + deltaX][posY + deltaY];
         if (canMove(deltaX, deltaY)) {
-            world[posX][posY] = Tileset.FLOOR;
+            world[posX][posY] = Tileset.CAT_EYE;
             posX += deltaX;
             posY += deltaY;
             world[posX][posY] = Tileset.FLOWER;
             if (nextPos == Tileset.TREE) {
                 finishGame();
             }
-
-            MusicPlayer.playSoundEffect("src/walking-96582.wav");
-        }
-    }
-
-    public void movee(int deltaX, int deltaY) {
-        if (canMove(deltaX, deltaY)) {
-            world[posX][posY] = Tileset.CAT_EYE;
-            posX += deltaX;
-            posY += deltaY;
-            world[posX][posY] = Tileset.FLOWER;
             MusicPlayer.playSoundEffect("src/walking-96582.wav");
         }
     }

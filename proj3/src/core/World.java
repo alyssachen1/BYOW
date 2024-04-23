@@ -49,7 +49,6 @@ public class World {
         fillWithNothing();
         generateRooms();
         generateHallways();
-        placeRandomTree();
         Room startRoom = rooms.get(0);
         this.avatar = new Avatar(currentState, startRoom.startX, startRoom.startY);
     }
@@ -82,19 +81,6 @@ public class World {
                 visibility[x][y] = false;
             }
         }
-    }
-
-    private void placeRandomTree() {
-        int x, y;
-        do {
-            x = RandomUtils.uniform(random, 0, DEFAULT_WIDTH);
-            y = RandomUtils.uniform(random, 0, DEFAULT_HEIGHT);
-        } while (!isValidTreeLocation(x, y));
-        currentState[x][y] = Tileset.TREE;
-    }
-
-    private boolean isValidTreeLocation(int x, int y) {
-        return currentState[x][y] == Tileset.FLOOR;
     }
 
 
@@ -186,7 +172,6 @@ public class World {
         }
     }
 
-    // for autograder buddy
     public void runGameFromInputt(String input) {
         boolean prev = false;
 

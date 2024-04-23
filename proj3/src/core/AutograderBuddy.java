@@ -34,7 +34,7 @@ public class AutograderBuddy {
             String restInput = upperInput.substring(endIndex + 1);
             String seedString = upperInput.substring(startIndex, endIndex);
             World world = new World(seedString);
-            world.runGameFromInput(restInput);
+            world.runGameFromInputt(restInput);
             return world.currentState;
         } else {
             String restInput = upperInput.substring(1);
