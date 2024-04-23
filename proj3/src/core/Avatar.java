@@ -30,7 +30,7 @@ public class Avatar {
             world[posX][posY] = Tileset.FLOWER;
             MusicPlayer.playSoundEffect("src/walking-96582.wav");
             world[posX][posY] = Tileset.FLOWER;
-            MusicPlayer.playSoundEffect("path/to/walking_sound.wav");
+            MusicPlayer.playSoundEffect("src/walking_sound.wav");
         }
     }
 
