@@ -101,17 +101,12 @@ public class World {
         boolean prev = false;
 
         while (running) {
-            //process input
             handleInput();
 
-            //update state
             updateVisibility();
-            //clear draw
             StdDraw.clear();
-            //render all game elements
             ter.renderFrame(currentState, applyLOS, visibility);
 
-            //draw hud
             double mouseX = StdDraw.mouseX();
             double mouseY = StdDraw.mouseY();
             int x = (int) mouseX;
@@ -122,11 +117,8 @@ public class World {
                 hud(mouseTile);
             }
 
-            //show std draw
             StdDraw.show();
 
-
-            //post frame processing
             if (StdDraw.isKeyPressed(KeyEvent.VK_SHIFT) && StdDraw.isKeyPressed(KeyEvent.VK_SEMICOLON)) {
                 prev = true;
             }
@@ -154,6 +146,7 @@ public class World {
         StdDraw.setPenColor(StdDraw.WHITE);
         StdDraw.textLeft(1, 39, "Tile: " + tile.description());
         StdDraw.text(73, 39, "Press P to toggle light");
+        StdDraw.text(73, 29, "Try to find the tree!");
     }
 
     public void runGameFromInput(String input) {
@@ -218,8 +211,6 @@ public class World {
                     board[x][height - y - 1] = Tileset.WALL;
                 } else if (tileChar == Tileset.FLOWER.character()) {
                     board[x][height - y - 1] = Tileset.FLOWER;
-                } else if (tileChar == Tileset.AVATAR.character()) {
-                    board[x][height - y - 1] = Tileset.AVATAR;
                     startX = x;
                     startY = height - y - 1;
                 } else {
@@ -260,8 +251,6 @@ public class World {
                     board[x][height - y - 1] = Tileset.WALL;
                 } else if (tileChar == Tileset.FLOWER.character()) {
                     board[x][height - y - 1] = Tileset.FLOWER;
-                } else if (tileChar == Tileset.AVATAR.character()) {
-                    board[x][height - y - 1] = Tileset.AVATAR;
                     startX = x;
                     startY = height - y - 1;
                 } else {
