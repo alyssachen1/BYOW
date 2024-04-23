@@ -49,9 +49,24 @@ public class World {
         fillWithNothing();
         generateRooms();
         generateHallways();
+        placeRandomTree();
         Room startRoom = rooms.get(0);
         this.avatar = new Avatar(currentState, startRoom.startX, startRoom.startY);
     }
+
+    private void placeRandomTree() {
+        int x, y;
+        do {
+            x = RandomUtils.uniform(random, 0, DEFAULT_WIDTH);
+            y = RandomUtils.uniform(random, 0, DEFAULT_HEIGHT);
+        } while (!isValidTreeLocation(x, y));
+        currentState[x][y] = Tileset.TREE;
+    }
+
+    private boolean isValidTreeLocation(int x, int y) {
+        return currentState[x][y] == Tileset.CAT_EYE;
+    }
+
 
     private void generateRooms() {
         numRooms = RandomUtils.uniform(random, MIN_ROOMS, MAX_ROOMS);
@@ -172,7 +187,6 @@ public class World {
         }
     }
 
-<<<<<<< HEAD
     public void runGameFromInputt(String input) {
         boolean prev = false;
 
@@ -195,9 +209,6 @@ public class World {
             }
         }
     }
-
-=======
->>>>>>> parent of 690d366 (fixed footsteps and added ending screen)
 
     public void saveGame() {
         StringBuilder sb = new StringBuilder();
@@ -235,15 +246,12 @@ public class World {
                     board[x][height - y - 1] = Tileset.FLOOR;
                 } else if (tileChar == Tileset.WALL.character()) {
                     board[x][height - y - 1] = Tileset.WALL;
-<<<<<<< HEAD
                 } else if (tileChar == Tileset.TREE.character()) {
                     board[x][height - y - 1] = Tileset.TREE;
                 } else if (tileChar == Tileset.CAT_EYE.character()) {
                     board[x][height - y - 1] = Tileset.CAT_EYE;
                 } else if (tileChar == Tileset.ROCK_WALL.character()) {
                     board[x][height - y - 1] = Tileset.ROCK_WALL;
-=======
->>>>>>> parent of 690d366 (fixed footsteps and added ending screen)
                 } else if (tileChar == Tileset.FLOWER.character()) {
                     board[x][height - y - 1] = Tileset.FLOWER;
                     startX = x;
@@ -284,15 +292,12 @@ public class World {
                     board[x][height - y - 1] = Tileset.FLOOR;
                 } else if (tileChar == Tileset.WALL.character()) {
                     board[x][height - y - 1] = Tileset.WALL;
-<<<<<<< HEAD
                 } else if (tileChar == Tileset.TREE.character()) {
                     board[x][height - y - 1] = Tileset.TREE;
                 } else if (tileChar == Tileset.CAT_EYE.character()) {
                     board[x][height - y - 1] = Tileset.CAT_EYE;
                 } else if (tileChar == Tileset.ROCK_WALL.character()) {
                     board[x][height - y - 1] = Tileset.ROCK_WALL;
-=======
->>>>>>> parent of 690d366 (fixed footsteps and added ending screen)
                 } else if (tileChar == Tileset.FLOWER.character()) {
                     board[x][height - y - 1] = Tileset.FLOWER;
                     startX = x;

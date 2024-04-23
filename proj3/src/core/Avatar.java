@@ -1,6 +1,9 @@
 package core;
+import edu.princeton.cs.algs4.StdDraw;
 import tileengine.TETile;
 import tileengine.*;
+
+import java.awt.event.KeyEvent;
 
 
 public class Avatar {
@@ -16,55 +19,38 @@ public class Avatar {
     }
 
     public boolean canMove(int deltaX, int deltaY) {
-<<<<<<< HEAD
         TETile nextPos = world[posX + deltaX][posY + deltaY];
-        if (nextPos == Tileset.FLOOR || nextPos == Tileset.TREE) {
-            if (world[posX + deltaX][posY + deltaY] == Tileset.CAT_EYE) {
-                return true;
-            }
-            if (world[posX + deltaX][posY + deltaY] == Tileset.FLOOR) {
-                return true;
-            }
-=======
-        if (world[posX + deltaX][posY + deltaY] == Tileset.FLOOR) {
+        if (nextPos == Tileset.CAT_EYE || nextPos == Tileset.TREE) {
             return true;
->>>>>>> parent of 690d366 (fixed footsteps and added ending screen)
         }
         return false;
     }
 
-    public void move(int deltaX, int deltaY) {
-        if (canMove(deltaX, deltaY)) {
-<<<<<<< HEAD
-            world[posX][posY] = Tileset.CAT_EYE;
-            posX += deltaX;
-            posY += deltaY;
-            world[posX][posY] = Tileset.FLOWER;
-            MusicPlayer.playSoundEffect("src/walking-96582.wav");
-        }
-    }
+        public void move(int deltaX, int deltaY) {
+            TETile nextPos = world[posX + deltaX][posY + deltaY];
+            if (canMove(deltaX, deltaY)) {
+                world[posX][posY] = Tileset.FLOOR;
+                posX += deltaX;
+                posY += deltaY;
+                world[posX][posY] = Tileset.FLOWER;
+                if (nextPos == Tileset.TREE) {
+                    finishGame();
+                }
 
-    public void movee(int deltaX, int deltaY) {
-        TETile nextPos = world[posX + deltaX][posY + deltaY];
-        if (canMove(deltaX, deltaY)) {
-            world[posX][posY] = Tileset.CAT_EYE;
-            posX += deltaX;
-            posY += deltaY;
-            world[posX][posY] = Tileset.FLOWER;
-            if (nextPos == Tileset.TREE) {
-                finishGame();
+                MusicPlayer.playSoundEffect("src/walking-96582.wav");
             }
-=======
-            world[posX][posY] = Tileset.FLOOR;
-            posX += deltaX;
-            posY += deltaY;
-            world[posX][posY] = Tileset.FLOWER;
->>>>>>> parent of 690d366 (fixed footsteps and added ending screen)
-            MusicPlayer.playSoundEffect("src/walking-96582.wav");
         }
-    }
 
-<<<<<<< HEAD
+        public void movee(int deltaX, int deltaY) {
+            if (canMove(deltaX, deltaY)) {
+                world[posX][posY] = Tileset.FLOOR;
+                posX += deltaX;
+                posY += deltaY;
+                world[posX][posY] = Tileset.FLOWER;
+                MusicPlayer.playSoundEffect("src/walking-96582.wav");
+            }
+        }
+
     private void finishGame() {
         StdDraw.setCanvasSize(800, 800);
         StdDraw.setXscale(0, 800);
@@ -85,8 +71,6 @@ public class Avatar {
             }
         }
     }
-=======
->>>>>>> parent of 690d366 (fixed footsteps and added ending screen)
 
     public void updateBoard(char key) {
         if (key == 'a' || key == 'A') {
