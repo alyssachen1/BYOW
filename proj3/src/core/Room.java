@@ -47,6 +47,7 @@ public class Room {
             for (int y = startY - 1; y < startY + height; y++) {
                 if ((x == startX - 1 || x == startX + width - 1 || y == startY - 1 || y == startY + height - 1)) {
                     world[x][y] = Tileset.NOTHING;
+                    world[x][y] = Tileset.WALL;
                 }
             }
         }
