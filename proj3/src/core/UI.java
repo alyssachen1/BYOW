@@ -20,9 +20,10 @@ public class UI {
 
             StdDraw.setPenColor(StdDraw.WHITE);
             StdDraw.text(400, 500, "THE HORROR GAME");
-            StdDraw.text(400, 400, "New Game (N)");
-            StdDraw.text(400, 350, "Load Game (L)");
-            StdDraw.text(400, 300, "Quit (Q)");
+            StdDraw.text(390, 450, "Objective: Navigate through the darkness to find the tree.");
+            StdDraw.text(400, 380, "New Game (N)");
+            StdDraw.text(400, 330, "Load Game (L)");
+            StdDraw.text(400, 280, "Quit (Q)");
             StdDraw.show();
             if (StdDraw.isKeyPressed(KeyEvent.VK_Q)) {
                 System.exit(0);

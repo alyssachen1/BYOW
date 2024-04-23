@@ -162,7 +162,6 @@ public class World {
         StdDraw.setPenColor(StdDraw.WHITE);
         StdDraw.textLeft(1, 39, "Tile: " + tile.description());
         StdDraw.text(73, 39, "Press P to toggle light");
-        StdDraw.text(73, 37, "Try to find the tree!");
     }
 
     public void runGameFromInput(String input) {
