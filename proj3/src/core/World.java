@@ -92,7 +92,7 @@ public class World {
     public void fillWithNothing() {
         for (int x = 0; x < DEFAULT_WIDTH; x++) {
             for (int y = 0; y < DEFAULT_HEIGHT; y++) {
-                currentState[x][y] = Tileset.CELL;
+                currentState[x][y] = Tileset.FILL;
                 visibility[x][y] = false;
             }
         }
@@ -240,8 +240,8 @@ public class World {
             String row = lines[y + 1];
             for (int x = 0; x < width; x++) {
                 char tileChar = row.charAt(x);
-                if (tileChar == Tileset.CELL.character()) {
-                    board[x][height - y - 1] = Tileset.CELL;
+                if (tileChar == Tileset.FILL.character()) {
+                    board[x][height - y - 1] = Tileset.FILL;
                 } else if (tileChar == Tileset.FLOOR.character()) {
                     board[x][height - y - 1] = Tileset.FLOOR;
                 } else if (tileChar == Tileset.WALL.character()) {
@@ -286,8 +286,8 @@ public class World {
             String row = lines[y + 1];
             for (int x = 0; x < width; x++) {
                 char tileChar = row.charAt(x);
-                if (tileChar == Tileset.CELL.character()) {
-                    board[x][height - y - 1] = Tileset.CELL;
+                if (tileChar == Tileset.FILL.character()) {
+                    board[x][height - y - 1] = Tileset.FILL;
                 } else if (tileChar == Tileset.FLOOR.character()) {
                     board[x][height - y - 1] = Tileset.FLOOR;
                 } else if (tileChar == Tileset.WALL.character()) {

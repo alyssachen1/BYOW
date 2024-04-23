@@ -12,8 +12,6 @@ public class Avatar {
     public int posY;
     private TETile[][] world;
 
-    public static boolean finished = false;
-
     public Avatar(TETile[][] world, int startX, int startY) {
         this.world = world;
         this.posX = startX;
@@ -37,6 +35,7 @@ public class Avatar {
                 posY += deltaY;
                 world[posX][posY] = Tileset.FLOWER;
                 if (nextPos == Tileset.TREE) {
+                    MusicPlayer.playSoundEffect("src/hotel-bill-ding-1-174457.wav");
                     finishGame();
                 }
 
@@ -61,6 +60,7 @@ public class Avatar {
         StdDraw.enableDoubleBuffering();
 
         while (true) {
+            MusicPlayer.playSoundEffect("src/scary-music-box-for-spooky-scenes-165983.wav");
             StdDraw.clear(StdDraw.BLACK);
             StdDraw.setPenColor(StdDraw.WHITE);
             StdDraw.text(400, 500, "CONGRATULATIONS! YOU'VE FINISHED THE GAME");

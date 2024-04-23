@@ -1,15 +1,6 @@
 package core;
 import edu.princeton.cs.algs4.StdDraw;
-import tileengine.TETile;
-import tileengine.Tileset;
 
-import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import javax.imageio.ImageIO;
-import java.io.File;
-import java.io.IOException;
 import java.awt.event.KeyEvent;
 import utils.*;
 
@@ -41,10 +32,6 @@ public class UI {
             if (StdDraw.isKeyPressed(KeyEvent.VK_L)) {
                 runLoad();
             }
-//            if (StdDraw.isKeyPressed(KeyEvent.VK_C)) {
-//                customAvatar();
-//                customAvatar = true;
-//            }
         }
     }
 
@@ -80,44 +67,6 @@ public class UI {
         }
 
     }
-
-//    public void customAvatar() {
-//        JFileChooser fileChooser = new JFileChooser();
-//        fileChooser.setDialogTitle("Select an avatar image");
-//        fileChooser.setAcceptAllFileFilterUsed(false);
-//        FileNameExtensionFilter filter = new FileNameExtensionFilter("Image files", "jpg", "png", "gif");
-//        fileChooser.addChoosableFileFilter(filter);
-//
-//        int result = fileChooser.showOpenDialog(null);
-//        if (result == JFileChooser.APPROVE_OPTION) {
-//            File selectedFile = fileChooser.getSelectedFile();
-//            try {
-//                BufferedImage avatarImage = ImageIO.read(selectedFile);
-//                StdDraw.picture(400, 400, "your_avatar.png", 100, 100);
-//                saveAvatarImage(avatarImage);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//    }
-
-//    private void saveAvatarImage(BufferedImage image) {
-//        try {
-//            File outputfile = new File("resources/avatars/custom_avatar.png");
-//            ImageIO.write(image, "png", outputfile);
-//
-//            TETile customAvatar = new TETile('@', Color.white, Color.black, "Custom Avatar", "resources/avatars/custom_avatar.png", generateUniqueID());
-//            Tileset.CUSTOM_AVATAR = customAvatar;
-//        } catch (IOException e) {
-//            System.err.println("Error saving the avatar image: " + e.getMessage());
-//            e.printStackTrace();
-//        }
-//    }
-
-//    private int generateUniqueID() {
-//        // Generate a unique ID for the tile
-//        return Tileset.CUSTOM_AVATAR != null ? Tileset.CUSTOM_AVATAR.id() + 1 : 100; // Start custom IDs from 100 for example
-//    }
 
     private void runGame(String seedValue) {
         World world = new World(seedValue);

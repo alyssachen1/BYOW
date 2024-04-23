@@ -46,7 +46,7 @@ public class Room {
         for (int x = startX - 1; x < startX + width; x++) {
             for (int y = startY - 1; y < startY + height; y++) {
                 if ((x == startX - 1 || x == startX + width - 1 || y == startY - 1 || y == startY + height - 1)) {
-                    world[x][y] = Tileset.CELL;
+                    world[x][y] = Tileset.FILL;
                     world[x][y] = Tileset.ROCK_WALL;
                 }
             }
@@ -56,7 +56,7 @@ public class Room {
     public boolean isValidLocation() {
         for (int x = startX - 1; x <= startX + width + 1; x++) {
             for (int y = startY - 1; y <= startY + height + 1; y++) {
-                if (world[x][y] != Tileset.CELL) {
+                if (world[x][y] != Tileset.FILL) {
                     return false;
                 }
             }
