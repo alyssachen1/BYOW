@@ -26,6 +26,7 @@ public class Avatar {
             }
             return false;
         }
+        return false;
     }
 
     public void move(int deltaX, int deltaY) {
