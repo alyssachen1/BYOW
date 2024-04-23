@@ -37,7 +37,7 @@ public class Room {
     private void fillFloor() {
         for (int x = startX; x < startX + width; x++) {
             for (int y = startY; y < startY + height; y++) {
-                world[x][y] = Tileset.FLOOR;
+                world[x][y] = Tileset.CAT_EYE;
             }
         }
     }

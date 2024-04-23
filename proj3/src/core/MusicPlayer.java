@@ -5,6 +5,7 @@ import java.io.IOException;
 
 public class MusicPlayer {
 
+    // @source https://www.tabnine.com/code/java/methods/javax.sound.sampled.Clip/open
     public static void playMusic(String file) {
         try {
             File audioFile = new File(file);
@@ -23,6 +24,7 @@ public class MusicPlayer {
         playSound(file, 0); // Play only once
     }
 
+    // @source https://www.tabnine.com/code/java/methods/javax.sound.sampled.Clip/open
     private static void playSound(String file, int loopCount) {
         try {
             File audioFile = new File(file);

@@ -16,7 +16,7 @@ public class Avatar {
     }
 
     public boolean canMove(int deltaX, int deltaY) {
-        if (world[posX + deltaX][posY + deltaY] == Tileset.FLOOR) {
+        if (world[posX + deltaX][posY + deltaY] == Tileset.CAT_EYE) {
             return true;
         }
         return false;
@@ -24,7 +24,7 @@ public class Avatar {
 
     public void move(int deltaX, int deltaY) {
         if (canMove(deltaX, deltaY)) {
-            world[posX][posY] = Tileset.FLOOR;
+            world[posX][posY] = Tileset.CAT_EYE;
             posX += deltaX;
             posY += deltaY;
             world[posX][posY] = Tileset.AVATAR;

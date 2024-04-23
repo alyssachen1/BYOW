@@ -213,8 +213,8 @@ public class World {
                 char tileChar = row.charAt(x);
                 if (tileChar == Tileset.NOTHING.character()) {
                     board[x][height - y - 1] = Tileset.NOTHING;
-                } else if (tileChar == Tileset.FLOOR.character()) {
-                    board[x][height - y - 1] = Tileset.FLOOR;
+                } else if (tileChar == Tileset.CAT_EYE.character()) {
+                    board[x][height - y - 1] = Tileset.CAT_EYE;
                 } else if (tileChar == Tileset.PURPLE_WALL.character()) {
                     board[x][height - y - 1] = Tileset.PURPLE_WALL;
                 } else if (tileChar == Tileset.AVATAR.character()) {
@@ -253,8 +253,8 @@ public class World {
                 char tileChar = row.charAt(x);
                 if (tileChar == Tileset.NOTHING.character()) {
                     board[x][height - y - 1] = Tileset.NOTHING;
-                } else if (tileChar == Tileset.FLOOR.character()) {
-                    board[x][height - y - 1] = Tileset.FLOOR;
+                } else if (tileChar == Tileset.CAT_EYE.character()) {
+                    board[x][height - y - 1] = Tileset.CAT_EYE;
                 } else if (tileChar == Tileset.PURPLE_WALL.character()) {
                     board[x][height - y - 1] = Tileset.PURPLE_WALL;
                 } else if (tileChar == Tileset.AVATAR.character()) {
