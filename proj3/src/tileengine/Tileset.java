@@ -40,6 +40,8 @@ public class Tileset {
 
     public static final TETile CAT_EYE = new TETile(';', Color.white, Color.black, "cat eyes", "src/cateyesbg.png",14);
 
+    public static final TETile ROCK_WALL = new TETile('[', Color.white, Color.black, "rock wall", "src/rock wall tileset (1).png",15);
+
 }
 
 

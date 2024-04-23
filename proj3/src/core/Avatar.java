@@ -12,11 +12,11 @@ public class Avatar {
         this.world = world;
         this.posX = startX;
         this.posY = startY;
-        world[posX][posY] = Tileset.AVATAR;
+        world[posX][posY] = Tileset.FLOWER;
     }
 
     public boolean canMove(int deltaX, int deltaY) {
-        if (world[posX + deltaX][posY + deltaY] == Tileset.CAT_EYE) {
+        if (world[posX + deltaX][posY + deltaY] == Tileset.FLOOR) {
             return true;
         }
         return false;
@@ -24,10 +24,10 @@ public class Avatar {
 
     public void move(int deltaX, int deltaY) {
         if (canMove(deltaX, deltaY)) {
-            world[posX][posY] = Tileset.CAT_EYE;
+            world[posX][posY] = Tileset.FLOOR;
             posX += deltaX;
             posY += deltaY;
-            world[posX][posY] = Tileset.AVATAR;
+            world[posX][posY] = Tileset.FLOWER;
             MusicPlayer.playSoundEffect("src/walking-96582.wav");
         }
     }

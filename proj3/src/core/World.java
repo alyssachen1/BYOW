@@ -213,12 +213,12 @@ public class World {
                 char tileChar = row.charAt(x);
                 if (tileChar == Tileset.NOTHING.character()) {
                     board[x][height - y - 1] = Tileset.NOTHING;
-                } else if (tileChar == Tileset.CAT_EYE.character()) {
-                    board[x][height - y - 1] = Tileset.CAT_EYE;
-                } else if (tileChar == Tileset.PURPLE_WALL.character()) {
-                    board[x][height - y - 1] = Tileset.PURPLE_WALL;
-                } else if (tileChar == Tileset.AVATAR.character()) {
-                    board[x][height - y - 1] = Tileset.AVATAR;
+                } else if (tileChar == Tileset.FLOOR.character()) {
+                    board[x][height - y - 1] = Tileset.FLOOR;
+                } else if (tileChar == Tileset.WALL.character()) {
+                    board[x][height - y - 1] = Tileset.WALL;
+                } else if (tileChar == Tileset.FLOWER.character()) {
+                    board[x][height - y - 1] = Tileset.FLOWER;
                     startX = x;
                     startY = height - y - 1;
                 } else {
@@ -253,12 +253,12 @@ public class World {
                 char tileChar = row.charAt(x);
                 if (tileChar == Tileset.NOTHING.character()) {
                     board[x][height - y - 1] = Tileset.NOTHING;
-                } else if (tileChar == Tileset.CAT_EYE.character()) {
-                    board[x][height - y - 1] = Tileset.CAT_EYE;
-                } else if (tileChar == Tileset.PURPLE_WALL.character()) {
-                    board[x][height - y - 1] = Tileset.PURPLE_WALL;
-                } else if (tileChar == Tileset.AVATAR.character()) {
-                    board[x][height - y - 1] = Tileset.AVATAR;
+                } else if (tileChar == Tileset.FLOOR.character()) {
+                    board[x][height - y - 1] = Tileset.FLOOR;
+                } else if (tileChar == Tileset.WALL.character()) {
+                    board[x][height - y - 1] = Tileset.WALL;
+                } else if (tileChar == Tileset.FLOWER.character()) {
+                    board[x][height - y - 1] = Tileset.FLOWER;
                     startX = x;
                     startY = height - y - 1;
                 } else {

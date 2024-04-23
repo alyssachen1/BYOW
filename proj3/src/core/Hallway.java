@@ -53,16 +53,16 @@ public class Hallway {
         int endY = Math.max(room1Y, room2Y);
 
         for (int y = startY; y < endY; y++) {
-            if (world[room1X + 1][y] == Tileset.CAT_EYE || world[room1X + 1][y] == Tileset.PURPLE_WALL) {
+            if (world[room1X + 1][y] == Tileset.FLOOR || world[room1X + 1][y] == Tileset.WALL) {
                 continue;
             }
-            world[room1X + 1][y] = Tileset.PURPLE_WALL;
+            world[room1X + 1][y] = Tileset.WALL;
         }
         for (int y = startY; y < endY; y++) {
-            if (world[room1X - 1][y] == Tileset.CAT_EYE || world[room1X - 1][y] == Tileset.PURPLE_WALL) {
+            if (world[room1X - 1][y] == Tileset.FLOOR || world[room1X - 1][y] == Tileset.WALL) {
                 continue;
             }
-            world[room1X - 1][y] = Tileset.PURPLE_WALL;
+            world[room1X - 1][y] = Tileset.WALL;
         }
     }
 
@@ -71,7 +71,7 @@ public class Hallway {
         int endX = Math.max(room1X, room2X);
 
         for (int x = startX; x < endX; x++) {
-            world[x][room1Y] = Tileset.CAT_EYE;
+            world[x][room1Y] = Tileset.FLOOR;
         }
 
     }
@@ -80,16 +80,16 @@ public class Hallway {
         int startX = Math.min(room1X, room2X);
         int endX = Math.max(room1X, room2X);
         for (int x = startX; x <= endX + 1; x++) {
-            if (world[x][room1Y + 1] == Tileset.CAT_EYE) {
+            if (world[x][room1Y + 1] == Tileset.FLOOR) {
                 continue;
             }
-            world[x][room1Y + 1] = Tileset.PURPLE_WALL;
+            world[x][room1Y + 1] = Tileset.WALL;
         }
         for (int x = startX; x <= endX + 1; x++) {
-            if (world[x][room1Y - 1] == Tileset.CAT_EYE) {
+            if (world[x][room1Y - 1] == Tileset.FLOOR) {
                 continue;
             }
-            world[x][room1Y - 1] = Tileset.PURPLE_WALL;
+            world[x][room1Y - 1] = Tileset.WALL;
         }
     }
 
@@ -104,22 +104,22 @@ public class Hallway {
         //fill floor for vertical hallway
 
         for (int y = startY; y <= endY; y++) {
-            world[turnX][y] = Tileset.CAT_EYE;
+            world[turnX][y] = Tileset.FLOOR;
         }
 
         //wrap wall
 
         for (int y = startY; y <= endY; y++) {
-            if (world[turnX + 1][y] == Tileset.CAT_EYE) {
+            if (world[turnX + 1][y] == Tileset.FLOOR) {
                 continue;
             }
-            world[turnX + 1][y] = Tileset.PURPLE_WALL;
+            world[turnX + 1][y] = Tileset.WALL;
         }
         for (int y = startY; y <= endY; y++) {
             if (world[turnX - 1][y] == Tileset.FLOOR) {
                 continue;
             }
-            world[turnX - 1][y] = Tileset.PURPLE_WALL;
+            world[turnX - 1][y] = Tileset.WALL;
         }
 
 
