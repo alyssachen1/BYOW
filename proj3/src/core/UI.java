@@ -31,7 +31,6 @@ public class UI {
             StdDraw.text(400, 400, "New Game (N)");
             StdDraw.text(400, 350, "Load Game (L)");
             StdDraw.text(400, 300, "Quit (Q)");
-//            StdDraw.text(400, 250, "Custom Avatar (C)");
             StdDraw.show();
             if (StdDraw.isKeyPressed(KeyEvent.VK_Q)) {
                 System.exit(0);
@@ -40,6 +39,9 @@ public class UI {
                 promptSeed();
             }
             if (StdDraw.isKeyPressed(KeyEvent.VK_L)) {
+                if (World.SAVE_FILE.length() == 0) {
+                    System.exit(0);
+                }
                 runLoad();
             }
 //            if (StdDraw.isKeyPressed(KeyEvent.VK_C)) {

@@ -2,6 +2,7 @@ package core;
 import edu.princeton.cs.algs4.StdDraw;
 import tileengine.TETile;
 import tileengine.*;
+import utils.*;
 
 import java.awt.event.KeyEvent;
 
@@ -66,6 +67,7 @@ public class Avatar {
             StdDraw.pause(100);
 
             if (StdDraw.isKeyPressed(KeyEvent.VK_Q)) {
+                FileUtils.writeFile(World.SAVE_FILE, "");
                 System.exit(0);
                 break;
             }
