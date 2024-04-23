@@ -172,6 +172,7 @@ public class World {
         }
     }
 
+<<<<<<< HEAD
     public void runGameFromInputt(String input) {
         boolean prev = false;
 
@@ -195,6 +196,8 @@ public class World {
         }
     }
 
+=======
+>>>>>>> parent of 690d366 (fixed footsteps and added ending screen)
 
     public void saveGame() {
         StringBuilder sb = new StringBuilder();
@@ -232,12 +235,15 @@ public class World {
                     board[x][height - y - 1] = Tileset.FLOOR;
                 } else if (tileChar == Tileset.WALL.character()) {
                     board[x][height - y - 1] = Tileset.WALL;
+<<<<<<< HEAD
                 } else if (tileChar == Tileset.TREE.character()) {
                     board[x][height - y - 1] = Tileset.TREE;
                 } else if (tileChar == Tileset.CAT_EYE.character()) {
                     board[x][height - y - 1] = Tileset.CAT_EYE;
                 } else if (tileChar == Tileset.ROCK_WALL.character()) {
                     board[x][height - y - 1] = Tileset.ROCK_WALL;
+=======
+>>>>>>> parent of 690d366 (fixed footsteps and added ending screen)
                 } else if (tileChar == Tileset.FLOWER.character()) {
                     board[x][height - y - 1] = Tileset.FLOWER;
                     startX = x;
@@ -278,12 +284,15 @@ public class World {
                     board[x][height - y - 1] = Tileset.FLOOR;
                 } else if (tileChar == Tileset.WALL.character()) {
                     board[x][height - y - 1] = Tileset.WALL;
+<<<<<<< HEAD
                 } else if (tileChar == Tileset.TREE.character()) {
                     board[x][height - y - 1] = Tileset.TREE;
                 } else if (tileChar == Tileset.CAT_EYE.character()) {
                     board[x][height - y - 1] = Tileset.CAT_EYE;
                 } else if (tileChar == Tileset.ROCK_WALL.character()) {
                     board[x][height - y - 1] = Tileset.ROCK_WALL;
+=======
+>>>>>>> parent of 690d366 (fixed footsteps and added ending screen)
                 } else if (tileChar == Tileset.FLOWER.character()) {
                     board[x][height - y - 1] = Tileset.FLOWER;
                     startX = x;
