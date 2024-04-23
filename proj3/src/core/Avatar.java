@@ -28,7 +28,7 @@ public class Avatar {
             posX += deltaX;
             posY += deltaY;
             world[posX][posY] = Tileset.AVATAR;
-            MusicPlayer.playSoundEffect("path/to/walking_sound.wav");
+            MusicPlayer.playSoundEffect("src/walking-96582.wav");
         }
     }
 

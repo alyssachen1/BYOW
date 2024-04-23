@@ -101,6 +101,7 @@ public class World {
         boolean prev = false;
 
         while (running) {
+//            MusicPlayer.playMusic("src/Dark Ambient - Horror Background Music No Copyright (1).wav");
             //process input
             handleInput();
 
@@ -214,8 +215,8 @@ public class World {
                     board[x][height - y - 1] = Tileset.NOTHING;
                 } else if (tileChar == Tileset.FLOOR.character()) {
                     board[x][height - y - 1] = Tileset.FLOOR;
-                } else if (tileChar == Tileset.WALL.character()) {
-                    board[x][height - y - 1] = Tileset.WALL;
+                } else if (tileChar == Tileset.PURPLE_WALL.character()) {
+                    board[x][height - y - 1] = Tileset.PURPLE_WALL;
                 } else if (tileChar == Tileset.AVATAR.character()) {
                     board[x][height - y - 1] = Tileset.AVATAR;
                     startX = x;
@@ -254,8 +255,8 @@ public class World {
                     board[x][height - y - 1] = Tileset.NOTHING;
                 } else if (tileChar == Tileset.FLOOR.character()) {
                     board[x][height - y - 1] = Tileset.FLOOR;
-                } else if (tileChar == Tileset.WALL.character()) {
-                    board[x][height - y - 1] = Tileset.WALL;
+                } else if (tileChar == Tileset.PURPLE_WALL.character()) {
+                    board[x][height - y - 1] = Tileset.PURPLE_WALL;
                 } else if (tileChar == Tileset.AVATAR.character()) {
                     board[x][height - y - 1] = Tileset.AVATAR;
                     startX = x;

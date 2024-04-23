@@ -14,7 +14,6 @@ import java.awt.event.KeyEvent;
 
 
 public class UI {
-    private boolean customAvatar = false;
 
     public UI() {
         setUpCanvas();

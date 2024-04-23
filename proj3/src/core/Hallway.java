@@ -53,16 +53,16 @@ public class Hallway {
         int endY = Math.max(room1Y, room2Y);
 
         for (int y = startY; y < endY; y++) {
-            if (world[room1X + 1][y] == Tileset.FLOOR || world[room1X + 1][y] == Tileset.WALL) {
+            if (world[room1X + 1][y] == Tileset.FLOOR || world[room1X + 1][y] == Tileset.PURPLE_WALL) {
                 continue;
             }
-            world[room1X + 1][y] = Tileset.WALL;
+            world[room1X + 1][y] = Tileset.PURPLE_WALL;
         }
         for (int y = startY; y < endY; y++) {
-            if (world[room1X - 1][y] == Tileset.FLOOR || world[room1X - 1][y] == Tileset.WALL) {
+            if (world[room1X - 1][y] == Tileset.FLOOR || world[room1X - 1][y] == Tileset.PURPLE_WALL) {
                 continue;
             }
-            world[room1X - 1][y] = Tileset.WALL;
+            world[room1X - 1][y] = Tileset.PURPLE_WALL;
         }
     }
 
@@ -83,13 +83,13 @@ public class Hallway {
             if (world[x][room1Y + 1] == Tileset.FLOOR) {
                 continue;
             }
-            world[x][room1Y + 1] = Tileset.WALL;
+            world[x][room1Y + 1] = Tileset.PURPLE_WALL;
         }
         for (int x = startX; x <= endX + 1; x++) {
             if (world[x][room1Y - 1] == Tileset.FLOOR) {
                 continue;
             }
-            world[x][room1Y - 1] = Tileset.WALL;
+            world[x][room1Y - 1] = Tileset.PURPLE_WALL;
         }
     }
 
@@ -113,13 +113,13 @@ public class Hallway {
             if (world[turnX + 1][y] == Tileset.FLOOR) {
                 continue;
             }
-            world[turnX + 1][y] = Tileset.WALL;
+            world[turnX + 1][y] = Tileset.PURPLE_WALL;
         }
         for (int y = startY; y <= endY; y++) {
             if (world[turnX - 1][y] == Tileset.FLOOR) {
                 continue;
             }
-            world[turnX - 1][y] = Tileset.WALL;
+            world[turnX - 1][y] = Tileset.PURPLE_WALL;
         }
 
 
