@@ -49,6 +49,7 @@ public class World {
         fillWithNothing();
         generateRooms();
         generateHallways();
+        placeRandomTree();
         Room startRoom = rooms.get(0);
         this.avatar = new Avatar(currentState, startRoom.startX, startRoom.startY);
     }
@@ -81,6 +82,19 @@ public class World {
                 visibility[x][y] = false;
             }
         }
+    }
+
+    private void placeRandomTree() {
+        int x, y;
+        do {
+            x = RandomUtils.uniform(random, 0, DEFAULT_WIDTH);
+            y = RandomUtils.uniform(random, 0, DEFAULT_HEIGHT);
+        } while (!isValidTreeLocation(x, y));
+        currentState[x][y] = Tileset.TREE;
+    }
+
+    private boolean isValidTreeLocation(int x, int y) {
+        return currentState[x][y] == Tileset.FLOOR;
     }
 
 
@@ -172,6 +186,30 @@ public class World {
         }
     }
 
+    // for autograder buddy
+    public void runGameFromInputt(String input) {
+        boolean prev = false;
+
+        for (int i = 0; i < input.length(); i++) {
+            if (input.charAt(i) == ':') {
+                prev = true;
+            } else if (input.charAt(i) == 'Q' && prev) {
+                saveGame();
+                return;
+            } else if (i == 0 && input.charAt(i) == 'Q') {
+                return;
+            } else if (input.charAt(i) == 'W') {
+                avatar.movee(0, 1);
+            } else if (input.charAt(i) == 'A') {
+                avatar.movee(-1, 0);
+            } else if (input.charAt(i) == 'S') {
+                avatar.movee(0, -1);
+            } else if (input.charAt(i) == 'D') {
+                avatar.movee(1, 0);
+            }
+        }
+    }
+
 
     public void saveGame() {
         StringBuilder sb = new StringBuilder();
@@ -209,6 +247,8 @@ public class World {
                     board[x][height - y - 1] = Tileset.FLOOR;
                 } else if (tileChar == Tileset.WALL.character()) {
                     board[x][height - y - 1] = Tileset.WALL;
+                } else if (tileChar == Tileset.TREE.character()) {
+                    board[x][height - y - 1] = Tileset.TREE;
                 } else if (tileChar == Tileset.FLOWER.character()) {
                     board[x][height - y - 1] = Tileset.FLOWER;
                     startX = x;
@@ -249,6 +289,8 @@ public class World {
                     board[x][height - y - 1] = Tileset.FLOOR;
                 } else if (tileChar == Tileset.WALL.character()) {
                     board[x][height - y - 1] = Tileset.WALL;
+                } else if (tileChar == Tileset.TREE.character()) {
+                    board[x][height - y - 1] = Tileset.TREE;
                 } else if (tileChar == Tileset.FLOWER.character()) {
                     board[x][height - y - 1] = Tileset.FLOWER;
                     startX = x;
