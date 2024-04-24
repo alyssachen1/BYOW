@@ -252,8 +252,8 @@ public class World {
                     board[x][height - y - 1] = Tileset.CAT_EYE;
                 } else if (tileChar == Tileset.ROCK_WALL.character()) {
                     board[x][height - y - 1] = Tileset.ROCK_WALL;
-                } else if (tileChar == Tileset.FLOWER.character()) {
-                    board[x][height - y - 1] = Tileset.FLOWER;
+                } else if (tileChar == Tileset.GHOST_AVATAR.character()) {
+                    board[x][height - y - 1] = Tileset.GHOST_AVATAR;
                     startX = x;
                     startY = height - y - 1;
                 } else {
@@ -298,8 +298,8 @@ public class World {
                     board[x][height - y - 1] = Tileset.CAT_EYE;
                 } else if (tileChar == Tileset.ROCK_WALL.character()) {
                     board[x][height - y - 1] = Tileset.ROCK_WALL;
-                } else if (tileChar == Tileset.FLOWER.character()) {
-                    board[x][height - y - 1] = Tileset.FLOWER;
+                } else if (tileChar == Tileset.GHOST_AVATAR.character()) {
+                    board[x][height - y - 1] = Tileset.GHOST_AVATAR;
                     startX = x;
                     startY = height - y - 1;
                 } else {

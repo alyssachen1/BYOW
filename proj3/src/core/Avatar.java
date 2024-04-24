@@ -16,7 +16,7 @@ public class Avatar {
         this.world = world;
         this.posX = startX;
         this.posY = startY;
-        world[posX][posY] = Tileset.FLOWER;
+        world[posX][posY] = Tileset.GHOST_AVATAR;
     }
 
     public boolean canMove(int deltaX, int deltaY) {
@@ -33,7 +33,7 @@ public class Avatar {
                 world[posX][posY] = Tileset.CAT_EYE;
                 posX += deltaX;
                 posY += deltaY;
-                world[posX][posY] = Tileset.FLOWER;
+                world[posX][posY] = Tileset.GHOST_AVATAR;
                 if (nextPos == Tileset.TREE) {
                     MusicPlayer.playSoundEffect("src/decidemp3-14575.wav");
                     StdDraw.pause(1000);
@@ -49,7 +49,7 @@ public class Avatar {
                 world[posX][posY] = Tileset.CAT_EYE;
                 posX += deltaX;
                 posY += deltaY;
-                world[posX][posY] = Tileset.FLOWER;
+                world[posX][posY] = Tileset.GHOST_AVATAR;
             }
         }
 
